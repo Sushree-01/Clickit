@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {
   Box,
   Flex,
@@ -46,6 +47,7 @@ export const Navbar = () => {
   <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">Your Profile</Link>
   <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">Contact</Link>
   <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">Wishlist</Link>
+  
 </Box>
         <Spacer />
       </>
