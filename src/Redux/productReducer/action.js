@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS } from './actionType';
-import * as actionTypes from './actionTypes';
 
 export const getProduct =(obj)=> (dispatch) => {
   // Write logic here
@@ -17,13 +16,13 @@ export const getProduct =(obj)=> (dispatch) => {
 
 
 
-// Add to cart actions
-export const addToCart = (product) => ({
-  type: actionTypes.ADD_TO_CART,
-  payload: product,
-});
+// // Add to cart actions
+// export const addToCart = (product) => ({
+//   type: actionTypes.ADD_TO_CART,
+//   payload: product,
+// });
 
-export const removeFromCart = (productId) => ({
-  type: actionTypes.REMOVE_FROM_CART,
-  payload: productId,
-});
+// export const removeFromCart = (productId) => ({
+//   type: actionTypes.REMOVE_FROM_CART,
+//   payload: productId,
+// });
