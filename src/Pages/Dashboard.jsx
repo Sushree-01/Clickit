@@ -3,12 +3,24 @@ import {
   Box,
   Text,
   Button,
-  Flex
+  Flex,
+  Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  Stack,
+  Divider,
+  Heading,
+  ButtonGroup,Grid,
+  Link,Container
+
 } from "@chakra-ui/react";
 import { useState,useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styled from 'styled-components';
+import axios from 'axios';
 export const Dashboard = () => {
   const images=["https://m.media-amazon.com/images/G/31/img21/MA2023/AW23/AF/AW_2023_Desktop_Men._SX3000_QL85_FMpng_.png",
   "https://m.media-amazon.com/images/G/31/img21/MA2023/BOTW23/27thsept/Men_2_3000x900_1695858530844_0._CB577170120_.png"
@@ -28,22 +40,55 @@ const images2 = [
   "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/PUMA_29._SX846_QL85_FMpng_.png"
 
 ];
-const images3 = [
-  'https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-man.jpg',
-  'https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-x.jpg',
-  'https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-girl.jpg',
+const bloginfo = [
+  {
+    title: "Handlooms from Bharat",
+    image: "https://indbiz.gov.in/wp-content/uploads/2018/10/109.jpg",
+    date: "Sept 17, 2023",
+    desc: "Discover the rich handloom heritage of Bharat in our latest collection."
+  },
+  {
+    title: "Paris Fashion Week",
+    image: "https://www.filmibeat.com/img/2023/09/pfwmain1-1695646750.jpg",
+    date: "August 17, 2023",
+    desc: "Explore the latest trends and highlights from the glamorous Paris Fashion Week."
+  },
+  {
+    title: "Gucci Expanding in India",
+    image: "https://wwd.com/wp-content/uploads/2016/12/41a2739.jpg?w=1000&h=563&crop=1&resize=1000%2C563",
+    date: "May 17, 2023",
+    desc: "Gucci's exciting expansion plans in India: What's in store for fashion enthusiasts."
+  },
+  {
+    title: "Fashion in the '80s",
+    image: "https://preview.redd.it/jgb50tzskklb1.jpg?width=960&crop=smart&auto=webp&s=5fbcf3f3b6c1905a22d624d6d22b69762b30a4fc",
+    date: "Feb 17, 2023",
+    desc: "A nostalgic journey back to the fashion trends that defined the '80s era."
+  }
 ];
+
 const [currentIndex, setCurrentIndex] = useState(0);
+const [cardsData,setcarddata]=useState([])
+const [activeCategory, setActiveCategory] = useState("male");
+const[filtereddata,setfiltereddata]=useState([])
+
 useEffect(() => {
-  const interval = setInterval(() => {
-    goToNextSlide();
-  }, 3000);
+  axios.get(`https://65151b4adc3282a6a3cddbd1.mockapi.io/products`)
+  .then((res)=>{
+    setcarddata(res.data)
+    setfiltereddata(res.data.filter((e)=>e.gender===activeCategory))
+  })
+  .catch((err)=>[
+    console.log(err)
+  ])
+  // const interval = setInterval(() => {
+  //   goToNextSlide();
+  // }, 1000);
 
-  return () => {
-    clearInterval(interval);
-  };
-}, []);
-
+  // return () => {
+  //   clearInterval(interval);
+  // };
+}, [activeCategory]);
 const goToNextSlide = () => {
   setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
 };
@@ -61,79 +106,56 @@ const handleSwipe = (e) => {
     goToNextSlide();
   }
 };
-const handleImageHover = (e) => {
-  const image = e.target;
-  const stripe = image.nextElementSibling;
-  image.style.transform = 'scale(1.05)';
-  if (stripe) {
-    stripe.style.transform = 'translateX(0)';
+const handletab=(e)=>{
+  setActiveCategory(e)
+}
+const [currentPage, setCurrentPage] = useState(0);
+const cardsPerPage = 3;
+const totalPages = Math.ceil(cardsData.length / cardsPerPage);
+const handleNextPage = () => {
+  if (currentPage < totalPages - 1) {
+    setCurrentPage(currentPage + 1);
   }
 };
 
-const handleImageLeave = (e) => {
-  const image = e.target;
-  const stripe = image.nextElementSibling;
-  image.style.transform = 'scale(1)'; // Reset zoom
-  if (stripe) {
-    stripe.style.transform = 'translateX(-100%)'; // Reset stripe position
+const handlePrevPage = () => {
+  if (currentPage > 0) {
+    setCurrentPage(currentPage - 1);
   }
 };
-const imageContainerStyles = {
-  display: 'grid',
-  gridTemplateColumns: 'repeat(6, 1fr)',
-  gap: '1rem',
-  padding: '1rem',
-};
+const renderCards = () => {
+  const startIndex = currentPage * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
 
-const responsiveImageStyles = {
-  width: '100%',
-  height: 'auto',
-  maxWidth: '100%',
-  borderRadius: '8px',
-  textDecoration: 'none',
+  return filtereddata.slice(startIndex, endIndex).map((card) => (
+     <CARDDIV key={card.id}>
+      <div  className='card'>
+     <img src={card.image} className='card-image' alt={card.name}/>
+     <p className='card-title'>{card.name}</p>
+     <p className='card-brand'>{card.brand}</p>
+     <p className='card-gender'>{card.gender}</p>
+     <p className='card-rating'>{card.rating}</p>
+     <p className='card-price'>{card.price}</p>
+     <button>Add To Cart</button>
+     <button>Buy Now</button>
+      </div>
+     </CARDDIV>
+  ))
 };
-const Image2 = styled.img`
-  &:hover {
-    transform: scale(1.2);
-  }
-`;
-const ImageLink = styled.a(responsiveImageStyles);
-const imageContainerStyles2 = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  padding: '1rem',
-  width:"85%",
-  margin:'auto'
-};
+const blogsPerPage = 3;
+const [currentPage1, setCurrentPage1] = useState(0);
 
-const imageStyles = {
-  position: 'relative',
-  overflow: 'hidden',
-  cursor: 'pointer',
-  transition: 'transform 0.3s, box-shadow 0.3s',
-};
-
-const stripeStyles = {
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '100%',
-  background: 'linear-gradient(to bottom right, transparent 49.5%, white 50%, transparent 50.5%)',
-  transform: 'translateX(-100%)',
-  transition: 'transform 0.3s',
-};
-const ImageContainer = styled.div(imageStyles);
-
-const Image = styled.img`
-  width: 90%;
-  height: auto;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-const Stripe = styled.div(stripeStyles);
+  const nextSlide = () => {
+    if (currentPage1 < bloginfo.length - blogsPerPage) {
+      setCurrentPage1(currentPage1 + blogsPerPage);
+    }
+  };
+  const prevSlide = () => {
+    if (currentPage1 > 0) {
+      setCurrentPage1(currentPage1 - blogsPerPage);
+    }
+  };
+  const currentData = bloginfo.slice(currentPage1, currentPage1 + blogsPerPage);
   return (
     <>
       <Box position="relative" overflow="hidden" onTouchMove={handleSwipe}>
@@ -146,7 +168,7 @@ const Stripe = styled.div(stripeStyles);
     </Carousel>
     </Box>
     <DIV1>
-    <Box className="section-container">
+    <Box className="section-container" backgroundColor="gray.700">
       <Text className="section-title">
         Elevate Your Style, <br /> Embrace the Extraordinary.
       </Text>
@@ -158,117 +180,359 @@ const Stripe = styled.div(stripeStyles);
       </Button>
     </Box>
     </DIV1>
-    <Div>
-    <Flex h={'auto'} justify="center" mt="8" className="image-container">
-      <Image
-        src="https://m.media-amazon.com/images/I/71etIJtcrBL._AC_UF226,226_FMjpg_.jpg"
-        alt="1"
-        className="responsive-image"
-        cursor="pointer"
-            borderRadius="md"
-            onMouseEnter={(e)=>{ e.target.style.transform = "rotate(10deg)";}}
-            onMouseLeave={(e) => {
-              e.target.style.transform = "rotate(0deg)";
+    <DIV>
+      <h1>We Got You Covered</h1>
+      <div className="image-container">
+        <div>
+          <img
+            src="https://m.media-amazon.com/images/I/71etIJtcrBL._AC_UF226,226_FMjpg_.jpg"
+            alt="1"
+            className="responsive-image"
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'rotate(10deg)';
             }}
-      />
-      <Image
-        src="https://m.media-amazon.com/images/I/71jmhrRaSmL._AC_UF226,226_FMjpg_.jpg"
-        alt="2"
-        className="responsive-image"
-        cursor="pointer"
-            borderRadius="md"
-            onMouseEnter={(e)=>{ e.target.style.transform = "rotate(10deg)";}}
             onMouseLeave={(e) => {
-              e.target.style.transform = "rotate(0deg)";
+              e.target.style.transform = 'rotate(0deg)';
             }}
-      />
-      <Image
-        src="https://m.media-amazon.com/images/I/71KXIckY8PL._AC_UF226,226_FMjpg_.jpg"
-        alt="3"
-        className="responsive-image"
-        cursor="pointer"
-            borderRadius="md"
-            onMouseEnter={(e)=>{ e.target.style.transform = "rotate(10deg)";}}
+          />
+          <p className="image-text">Something For Partner?</p>
+        </div>
+        <div className="image-card">
+          <img
+            src="https://m.media-amazon.com/images/I/71jmhrRaSmL._AC_UF226,226_FMjpg_.jpg"
+            alt="2"
+            className="responsive-image"
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'rotate(10deg)';
+            }}
             onMouseLeave={(e) => {
-              e.target.style.transform = "rotate(0deg)";
+              e.target.style.transform = 'rotate(0deg)';
             }}
-      />
-    </Flex>
-    </Div>
+          />
+          <p className="image-text">Something For Siblings?</p>
+        </div>
+        <div>
+          <img
+            src="https://m.media-amazon.com/images/I/71KXIckY8PL._AC_UF226,226_FMjpg_.jpg"
+            alt="3"
+            className="responsive-image"
+            onMouseEnter={(e) => {
+              e.target.style.transform = 'rotate(10deg)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.transform = 'rotate(0deg)';
+            }}
+          />
+          <p className="image-text">Or For Family?</p>
+        </div>
+      </div>
+    </DIV>
     <div style={imageContainerStyles}>
-      {images2.map((imageLink, index) => (
-        <ImageLink key={index} href="#">
-          <Image src={imageLink} alt={`Image ${index + 1}`} />
-        </ImageLink>
+      {images2.map((imagep, index) => (
+        <Imagep key={index} href="#">
+          <Image src={imagep} alt={`Image ${index + 1}`} />
+        </Imagep>
       ))}
     </div>
-    <div style={imageContainerStyles2}>
-      {images3.map((imageLink, index) => (
-        <ImageContainer
-          key={index}
-          onMouseEnter={handleImageHover}
-          onMouseLeave={handleImageLeave}
-        >
-          <Image2 src={imageLink} alt={`Image ${index + 1}`} />
-          <Stripe />
-        </ImageContainer>
-      ))}
+    <div>
+      <Tabs
+        isFitted
+        isLazy
+        variant="enclosed"
+        colorScheme="blue"
+        alignContent="center"
+        w="80%"
+        margin="auto"
+      >
+        <TabList w="100%" fontSize={'xl'}>
+          <Tab  w="100%"  onClick={() => handletab('male')}>Men</Tab>
+          <Tab  w="100%" onClick={() => handletab("female")}>Women</Tab>
+          <Tab  w="100%" onClick={() => handletab("kids")}>Kids</Tab>
+        </TabList>
+        <TabPanels>
+        <TabPanel>
+        <TABDIV>
+        <div className="card-carousel" >
+          <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
+          </div>
+      {currentPage > 0 && (
+        <button className="prev-button" onClick={handlePrevPage}>
+          Previous
+        </button>
+      )}
+      {currentPage < totalPages - 1 && (
+        <button className="next-button" onClick={handleNextPage}>
+          Next
+        </button>
+      )}
+        </TABDIV>
+        </TabPanel>
+          <TabPanel>
+          <TABDIV>
+          <div className="card-carousel" >
+          <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
+          </div>
+      {currentPage > 0 && (
+        <button className="prev-button" onClick={handlePrevPage}>
+          Previous
+        </button>
+      )}
+      {currentPage < totalPages - 1 && (
+        <button className="next-button" onClick={handleNextPage}>
+          Next
+        </button>
+      )}
+    </TABDIV>
+          </TabPanel>
+          <TabPanel>
+          <TABDIV>
+          <div className="card-carousel" >
+          <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
+          </div>
+      {currentPage > 0 && (
+        <button className="prev-button" onClick={handlePrevPage}>
+          Previous
+        </button>
+      )}
+      {currentPage < totalPages - 1 && (
+        <button className="next-button" onClick={handleNextPage}>
+          Next
+        </button>
+      )}
+    </TABDIV>
+      </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
+  <DIV5>
+  <div className="image-container">
+    <div className="image-wrapper">
+      <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-man.jpg" alt="1" className="animated-image"/>
+      <div  className="overlay">
+      <div className="text">HOME TO BRANDS FROM AROUND THE WORLD</div>
+      </div>
+    </div>
+    <div className="image-wrapper">
+      <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-x.jpg" alt=" 2" className="animated-image"/>
+      <div className="overlay">
+      <div className="text">MIN 30% OFF ON ALL PRODUCTS</div>
+      </div>
+    </div>
+    <div className="image-wrapper">
+      <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-girl.jpg" alt=" 3" className="animated-image"/>
+      <div className="overlay">
+      <div className="text">BRACE YOURSELF WINTER 2023 SALE IS HERE</div>
+      </div>
+    </div>
+  </div>
+  </DIV5>
+  <DIV6>
+  <h1>Best In The Business</h1>
+    <div className='maindiv'>
+      
+    <div>
+      <h2>1.</h2>
+      <h3>Place Order</h3>
+      <h4>Explore our vast selection of products to make your order truly unique.</h4>
+      <button>Read More</button>
+    </div>
+    <div>
+      <h2>2.</h2>
+      <h3>Payment process</h3>
+      <h4>Enjoy a seamless and secure payment process for your fashion choices.</h4>
+      <button>Read More</button>
+    </div>
+    <div>
+      <h2>3.</h2>
+      <h3>24 Hours Delivery</h3>
+      <h4>Experience lightning-fast 24-hour delivery for your fashion desires</h4>
+      <button>Read More</button>
+    </div>
+    </div>
+  </DIV6>
+  <DIV7>
+  <div>
+  <p className="heading">Our Blogs</p>
+  <p className="subheading">
+    We explore the world of fashion every month and bring the best stories from around the world for our readers.
+  </p>
+  <div className="blog-container">
+      <div className="navigation">
+        {currentPage1 > 0 && (
+          <button className="prev-button" onClick={prevSlide}>
+           {`<`}
+          </button>
+        )}
+         <div className="blog-slides">
+        {currentData.map((blog, index) => (
+          <div key={index} className="blog">
+            <img className='image' src={blog.image} alt={blog.title} />
+            <p className="title">{blog.title}</p>
+            <p className="date">{blog.date}</p>
+            <p className="description">{blog.desc}</p>
+            <p className='continue'>Continue reading...</p>
+          </div>
+        ))}
+      </div>
+        {currentPage1 < bloginfo.length - blogsPerPage && (
+          <button className="next-button" onClick={nextSlide}>
+           {`>`}
+          </button>
+        )}
+      </div>
+    </div>
+</div>
+</DIV7>
+<Box backgroundColor="gray.800" color="white" justifyContent={"space-around"}>
+      <Container maxW="container.xl" py="8">
+        <Flex justifyContent="space-between" flexWrap="wrap">
+          <Box flexBasis={{ base: '100%', md: '30%' }} mb={{ base: '4', md: '0' }}>
+            <Text fontSize="xl" fontWeight="bold" align={"start"}>clickit</Text>
+            <Text fontSize={"lg"} align={"start"} mt={"10px"}>Discover globally renowned brands at incredibly competitive prices, with swift delivery right to your doorstep.</Text>
+            <Text fontSize={"sm"}  align={"start"} mt={"10px"}>Shop 2, Trillium Mall, Medical Square, Kurla, Mumbai-400070</Text>
+          </Box>
+          <Box  m={"10px"}>
+  <Text fontWeight="bold" mb="2" align={"start"} >Quick Links</Text>
+  <Flex flexDirection="column" align={"start"}>
+    <Box mb="2">
+      <Link href="#">Home</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">About Us</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Delivery Info</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Conditions</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Order Tracking</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">My Account</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">My Wishlist</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Careers</Link>
+    </Box>
+  </Flex>
+</Box>
+          <Box flexBasis={{ base: '100%', md: '25%' }} mb={{ base: '4', md: '0' }}>
+            <Text fontWeight="bold" mb="2" align={"start"} textAlign={'center'} w={'80%'}>Latest Posts</Text>
+            <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
+              <Text className="title">Indian handlooms</Text>
+              <Text className="date">Sept 17, 2023</Text>
+            </Box>
+            <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
+              <Text className="title">Paris Fashion Week</Text>
+              <Text className="date">August 17, 2023</Text>
+            </Box>
+            <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
+              <Text className="title">Gucci expanding in India</Text>
+              <Text className="date">Feb 17, 2023</Text>
+            </Box>
+          </Box>
+          
+          <Box flexBasis={{ base: '100%', md: '25%' }} mb={{ base: '4', md: '0' }}>
+            <Text fontWeight="bold" mb="2">Tags</Text>
+            <Flex flexWrap="wrap">
+              <Button variant="solid" size="sm" mr="2" mb="2">accessories</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">black</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">fashion</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">menfashion</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">sale</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">menfashion</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">jacket</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">denim</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">shirt</Button>
+            </Flex>
+          </Box>
+        </Flex>
+      </Container>
+      <Box backgroundColor="gray.700" textAlign="center" py={['2', '4']}>
+      <Container maxW="container.xl" py={['2', '4']}>
+        <Flex justifyContent={['center', 'space-between']} alignItems="center" flexWrap="wrap">
+          <Text fontSize="sm" color="white" textAlign={['center', 'left']} mb={['2', '0']}>Copyright 2023 of clickit</Text>
+          <Flex alignItems="center" justifyContent="flex-end">
+            <Text fontSize="sm" color="white" mr="2">Payments Accepted</Text>
+            <DIVIMG>
+            <Image className='img'  src="https://cdn.myshoptet.com/usr/www.led-grower.eu/user/documents/upload/img/logo-platebni-karty.png" alt="payments" />
+            </DIVIMG>
+          </Flex>
+        </Flex>
+      </Container>
+    </Box>
+    </Box>
     </>
   
   )
 }
-const Div=styled.div`
-@media screen and (max-width: 767px) {
-  .image-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .responsive-image {
-    width: 80%;
-    margin-bottom: 1rem;
-    max-width: 200px; 
-  }
-
+const DIV = styled.div`
+* {
+  text-align: center;
 }
-
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-  .responsive-image {
-    width: 50%;
-    margin-right: 1rem;
-    max-width: 200px;
+h1 {
+  margin: 2rem 0;
+}
+.image-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  font-size: 10px;
+  width: 80%;
+  margin: auto;
+}
+.responsive-image {
+  width: 0 0 0 33%;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: rotate(10deg);
   }
 }
-
+.image-text {
+  background-color: teal;
+  color: white;
+  text-align: center;
+}
+@media screen and (max-width: 499px) {
+  .image-container{
+    font-size: 8px;
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 1023px) {
+  .image-container{
+    font-size: 15px;
+  }
+}
 @media screen and (min-width: 1024px) {
-  .responsive-image {
-    width: 30%;
-    margin-right: 1rem;
-    max-width: 300px;
+  .image-container{
+    font-size: 20px;
   }
 }
-
 `
+
 const DIV1=styled.div`
 .section-container {
   text-align: center;
-  background-color: #333;
   padding: 2rem;
 }
-
 .section-title {
   font-size: 2rem;
   font-weight: bold;
   color: white;
   margin-bottom: 2rem;
 }
-
 .section-text {
   font-size: 1.2rem;
   color: white;
   margin-bottom: 2rem;
+  width: 70%;
+  margin: auto;
 }
-
 .section-button {
   border: 2px solid yellow;
   color: white;
@@ -278,23 +542,19 @@ const DIV1=styled.div`
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .section-button:hover {
   transform: scale(1.1);
   color: blue;
 }
-
 @media screen and (max-width: 767px) {
   .section-title {
     font-size: 1.5rem;
     margin-bottom: 1rem;
   }
-
   .section-text {
     font-size: 1rem;
     margin-bottom: 1rem;
   }
-
   .section-button {
     font-size: 0.8rem;
   }
@@ -331,4 +591,354 @@ const DIV1=styled.div`
     font-size: 1.2rem;
   }
 }
+`
+const imageContainerStyles = {
+  display: 'grid',
+  gridTemplateColumns: 'repeat(6, 1fr)',
+  gap: '1rem',
+  padding: '1rem',
+};
+const responsiveImageStyles = {
+  width: '100%',
+  height: 'auto',
+  maxWidth: '100%',
+  borderRadius: '8px',
+  textDecoration: 'none',
+};
+const Imagep = styled.a(responsiveImageStyles);
+const Image = styled.img`
+  width: 90%;
+  height: auto;
+  &:hover {
+    transform: scale(1.1);
+  }
+`;
+const CARDDIV=styled.div`
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .card {
+    width: 70%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .card {
+    width: 70%;
+  }
+}
+
+`
+const TABDIV=styled.div`
+ .card-carousel{
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+ }
+ @media screen and (max-width: 767px) {
+  .card-carousel{
+    flex-direction: column;
+  }
+ }
+`
+const DIV5=styled.div`
+.image-container {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  justify-content: space-around;
+  
+}
+.image-container img {
+  width: 100%;
+  height: 100%;
+}
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.animated-image {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease-in-out;
+}
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000000;
+  font-size: 38px;
+  z-index: 1;
+  font-weight: bolder;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #ffffff 5%, transparent 90%);
+  background-size: 150% 150%;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: 0 100%;
+  transform: scaleX(0);
+}
+
+.image-wrapper:hover .animated-image {
+  transform: scale(1.5);
+}
+
+.image-wrapper:hover .overlay {
+  transform: scaleX(1);
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  top: 50%;
+  transform-origin: 0 10%;
+  animation: slideStripe 2s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes slideStripe {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@media screen and (max-width: 767px) {
+    .image-container {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-wrapper {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+`
+const DIV6=styled.div`
+
+.maindiv {
+  background-color: #000;
+  color: #fff;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  font-size: 80px;
+}
+
+h2 {
+  font-size: 70%;
+  color: tomato;
+}
+h1{
+   font-size: 50px;
+}
+h3{
+  font-size: 50%;
+}
+h4{
+  font-size: 30%;
+}
+
+button {
+  background-color: transparent;
+  color: #fff;
+  border: 2px solid #fff;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: 30%;
+}
+
+button:hover {
+  transform: scale(1.1);
+  background-color: tomato;
+  color: #fff;
+}
+@media screen and (max-width: 767px) {
+  .maindiv{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 40px;
+  }
+  div > div:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+  h1{
+   font-size: 30px;
+}
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  div > div {
+    width: 50%;
+    margin-right: 0;
+    text-align: center
+  }
+  .maindiv{
+    font-size: 50px;
+  }
+  h1{
+   font-size: 30px;
+}
+}
+@media screen and (min-width: 1024px) {
+  div > div {
+    width: 30%;
+    margin-right: 1rem;
+    text-align: center;
+  }
+  .maindiv{
+    font-size: 80px;
+  }
+}
+`
+const DIV7=styled.div`
+.blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 80px;
+  width: 100%;
+  background-color: black;
+}
+.image{
+  width: 100%;
+}
+.blog:hover .image{
+  transform: scale(1.1);
+  transition: transform 0.3s ease-in-out;
+}
+.title{
+  font-size: 30%;
+}
+.date{
+  font-size: 15%;
+}
+.description{
+  font-size: 20%;
+}
+.continue{
+  font-size: 15%;
+  font-weight: bold;
+}
+.continue:hover{
+  color: tomato;
+}
+.blog-slides {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+.blog {
+  flex: 0 0 31%;
+  width: 100%;
+  background-color: black;
+  cursor: pointer;
+  color: #ffffff;
+  margin:10px;
+  border: 2px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.slide-left {
+  transform: translateX(-33.33%);
+}
+
+.slide-right {
+  transform: translateX(33.33%);
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin: 20px 0;
+}
+
+.prev-button,
+.next-button {
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20%;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+.prev-button{
+  bottom: 300px;
+  background-color: #000000;
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 50px;
+  width: 100%;
+  background-color: black;
+}
+.blog-slides {
+  display: flex;
+  flex-direction: column;
+}
+.blog{
+  width: 50%;
+  margin: auto;
+  overflow: visible;
+}
+}
+@media screen and (max-width: 767px) {
+  .blog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 30px;
+  width: 100%;
+  background-color: black;
+}
+.blog-slides {
+  display: flex;
+  flex-direction: column;
+}
+.blog{
+  width: 50%;
+  margin: auto;
+  overflow: visible;
+}
+}
+`
+const DIVIMG=styled.div`
+.img{
+  width: 15%;
+}
+
 `
