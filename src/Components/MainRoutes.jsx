@@ -1,11 +1,11 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { Dashboard } from '../Pages/Dashboard'
-import { Login } from '../Pages/Login'
+import Login  from '../Pages/Login'
 import { Cart } from '../Pages/Cart'
 import { Payment } from '../Pages/Payment'
 import { Product } from '../Pages/Product'
-import { Signup } from '../Pages/Signup'
+import  Signup from '../Pages/Signup'
 
 export const MainRoutes = () => {
   return (
