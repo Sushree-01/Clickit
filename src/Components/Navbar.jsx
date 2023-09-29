@@ -40,6 +40,8 @@ export const Navbar = () => {
       <>
         <Spacer />
         <Box>
+   <Link href="/product" _hover={{ color: 'teal.500' }} marginX="2">New Arrivals</Link>
+
   <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">Women</Link>
   <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">Men</Link>
   <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">Kids</Link>
