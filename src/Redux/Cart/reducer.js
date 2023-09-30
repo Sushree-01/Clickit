@@ -6,11 +6,9 @@ const initialState = {
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
-
     case GET_CART_DATA: return {...state, cart:payload}
     case ADD_TO_CART:
       return { ...state, cart: [...state.cart, { ...payload, quantity: 1 }] };
-
     case REMOVE_FROM_CART:
       return { ...state, cart: state.cart.filter((item) => item.id !== payload.id) };
     case UPDATE_CART_ITEM_QUANTITY:
