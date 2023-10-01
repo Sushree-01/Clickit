@@ -13,32 +13,30 @@ import {
   Link,
   Container,
   useBreakpointValue
-
 } from "@chakra-ui/react";
-import { useState, useEffect } from 'react';
+import { useState,useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styled from 'styled-components';
 import axios from 'axios';
 import { motion, isValidMotionProp } from 'framer-motion'
 export const Dashboard = () => {
-  const images = ["https://m.media-amazon.com/images/G/31/img21/MA2023/AW23/AF/AW_2023_Desktop_Men._SX3000_QL85_FMpng_.png",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/BOTW23/27thsept/Men_2_3000x900_1695858530844_0._CB577170120_.png"
-    , "https://m.media-amazon.com/images/G/31/img21/MA2023/Sept/world-cup/updated/woMen_Desktop_800._CB578332367_.jpg"]
-  const images2 = [
-    'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Van-Heusen_2._SX846_QL85_FMpng_.png',
-    'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Allen-Solly_47._SX846_QL85_FMpng_.png',
-    'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/USPA_14._SX846_QL85_FMpng_.png',
-    'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/Peter-England_17._SX846_QL85_FMpng_.png',
-    'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/Pepe-Jeans_19._SX846_QL85_FMpng_.png',
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Arrow_37._SX846_QL85_FMpng_.png",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/sports/Adidas_2._SX846_QL85_FMpng_.png",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Lee_3._SX846_QL85_FMpng_.png",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/Dennis-Lingo._SX846_QL85_.jpg",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/Symbol_52._SX846_QL85_FMpng_.png",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Levi-s_54._SX846_QL85_FMpng_.png",
-    "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/PUMA_29._SX846_QL85_FMpng_.png"
-
+  const images=["https://m.media-amazon.com/images/G/31/img21/MA2023/AW23/AF/AW_2023_Desktop_Men._SX3000_QL85_FMpng_.png",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/BOTW23/27thsept/Men_2_3000x900_1695858530844_0._CB577170120_.png"
+,"https://m.media-amazon.com/images/G/31/img21/MA2023/Sept/world-cup/updated/woMen_Desktop_800._CB578332367_.jpg"]
+const images2 = [
+  'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Van-Heusen_2._SX846_QL85_FMpng_.png',
+  'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Allen-Solly_47._SX846_QL85_FMpng_.png',
+  'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/USPA_14._SX846_QL85_FMpng_.png',
+  'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/Peter-England_17._SX846_QL85_FMpng_.png',
+  'https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/Pepe-Jeans_19._SX846_QL85_FMpng_.png',
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Arrow_37._SX846_QL85_FMpng_.png",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/sports/Adidas_2._SX846_QL85_FMpng_.png",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Lee_3._SX846_QL85_FMpng_.png",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/Dennis-Lingo._SX846_QL85_.jpg",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/Symbol_52._SX846_QL85_FMpng_.png",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/P0/brands_mfd/Levi-s_54._SX846_QL85_FMpng_.png",
+  "https://m.media-amazon.com/images/G/31/img21/MA2023/WRS/brandsinfocus/PUMA_29._SX846_QL85_FMpng_.png"
 
 ];
 const bloginfo = [
@@ -93,77 +91,80 @@ useEffect(() => {
   return () => {
     clearInterval(interval);
     
-
   };
+}, [activeCategory]);
+const goToNextSlide = () => {
+  setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+};
 
-  const goToPrevSlide = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
+const goToPrevSlide = () => {
+  setCurrentIndex((prevIndex) =>
+    prevIndex === 0 ? images.length - 1 : prevIndex - 1
+  );
+};
 
-  const handleSwipe = (e) => {
-    if (e.deltaX > 50) {
-      goToPrevSlide();
-    } else if (e.deltaX < -50) {
-      goToNextSlide();
-    }
-  };
-  const handletab = (e) => {
-    setActiveCategory(e)
+const handleSwipe = (e) => {
+  if (e.deltaX > 50) {
+    goToPrevSlide();
+  } else if (e.deltaX < -50) {
+    goToNextSlide();
   }
-  const [currentPage, setCurrentPage] = useState(0);
-  const cardsPerPage = 3;
-  const totalPages = Math.ceil(cardsData.length / cardsPerPage);
-  const handleNextPage = () => {
-    if (currentPage < totalPages - 1) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
+};
+const handletab=(e)=>{
+  setActiveCategory(e)
+}
+const [currentPage, setCurrentPage] = useState(0);
+const cardsPerPage = 3;
+const totalPages = Math.ceil(cardsData.length / cardsPerPage);
+const handleNextPage = () => {
+  if (currentPage < totalPages - 1) {
+    setCurrentPage(currentPage + 1);
+  }
+};
 
-  const handlePrevPage = () => {
-    if (currentPage > 0) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-  const renderCards = () => {
-    const startIndex = currentPage * cardsPerPage;
-    const endIndex = startIndex + cardsPerPage;
+const handlePrevPage = () => {
+  if (currentPage > 0) {
+    setCurrentPage(currentPage - 1);
+  }
+};
+const renderCards = () => {
+  const startIndex = currentPage * cardsPerPage;
+  const endIndex = startIndex + cardsPerPage;
 
-    return filtereddata.slice(startIndex, endIndex).map((card) => (
-      <CARDDIV key={card.id}>
+  return filtereddata.slice(startIndex, endIndex).map((card) => (
+     <CARDDIV key={card.id}>
         <Box
-          className="card"
-          borderWidth="1px"
-          borderRadius="md"
-          p="4"
-          boxShadow="md"
-          mb="4"
-          textAlign="left"
-        >
-          <Image src={card.image} alt={card.name} className="image" />
-          <Text className='name' fontWeight="bold" mt="2">
-            {card.name}
-          </Text>
-          <Text color="gray.600" className='brand'>
-            {card.brand}
-          </Text>
-          <Text display="flex" textAlign={'center'} className='rating'>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z" /></svg>{card.rating}
-          </Text>
-          <Text color="teal.500" mt="2" display="flex" className='price'>
-            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z" /></svg>{card.price}
-          </Text>
-          <div className='buttons'>
-            <button className='buttonadd'>Add</button>
-            <button className='buttonbuy'>Buy</button>
-          </div>
-        </Box>
-      </CARDDIV>
-    ))
-  };
-  const blogsPerPage = 3;
-  const [currentPage1, setCurrentPage1] = useState(0);
+    className="card"
+    borderWidth="1px"
+    borderRadius="md"
+    p="4"
+    boxShadow="md"
+    mb="4"
+    textAlign="left"
+  >
+    <Image src={card.image} alt={card.name} className="image" />
+    <Text className='name' fontWeight="bold" mt="2">
+      {card.name}
+    </Text>
+    <Text color="gray.600" className='brand'>
+      {card.brand}
+    </Text>
+    <Text display="flex" textAlign={'center'} className='rating'>
+    <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"/></svg>{card.rating}
+    </Text>
+    <Text color="teal.500" mt="2" display="flex" className='price'>
+    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>{card.price}
+    </Text>
+    <div className='buttons'>
+      <button className='buttonadd'>Add</button>
+      <button className='buttonbuy'>Buy</button>
+    </div>
+  </Box>
+     </CARDDIV>
+  ))
+};
+const blogsPerPage = 3;
+const [currentPage1, setCurrentPage1] = useState(0);
 
   const nextSlide = () => {
     if (currentPage1 < bloginfo.length - blogsPerPage) {
@@ -206,79 +207,75 @@ useEffect(() => {
     </Box>
     </CARTICON>
       <Box position="relative" overflow="hidden" onTouchMove={handleSwipe} mt={"20px"}>
-        <Carousel
-          selectedItem={currentIndex}
-          onChange={setCurrentIndex}>
-          {images.map((image, index) => (
-            <div key={index}>
-              <img src={image} alt={`Slide ${index}`} />
-            </div>
-          ))}
-        </Carousel>
-      </Box>
-      <DIV1>
-        <Box className="section-container" backgroundColor="gray.700">
-          <Text className="section-title">
-            Elevate Your Style, <br /> Embrace the Extraordinary.
-          </Text>
-          <Text className="section-text">
-            Pioneering the fashion frontier, our platform brings together style enthusiasts, designers, and brands, igniting a revolution in unique, ownable fashion finds.
-          </Text>
-          <Button className="section-button">
-            Shop Now
-          </Button>
-        </Box>
-      </DIV1>
-      <DIV>
-        <Box textAlign="center" padding="2rem">
-          <Text
-            fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
-            fontWeight="bold"
-            color="green.500"
-          >
-            We Got You Covered
-          </Text>
-        </Box>
-        <DIV10>
-          <div className="image-container">
-            <div>
-              <div className='image-wrap'>
-                <img
-                  src="https://m.media-amazon.com/images/I/71etIJtcrBL._AC_UF226,226_FMjpg_.jpg"
-                  alt="1"
-                  className="responsive-image"
-                  onMouseEnter={(e) => { rotateImage(e.target, true) }}
-                  onMouseLeave={(e) => { rotateImage(e.target, false) }}
-                />
-              </div>
-              <p className="image-text">Something For Partner?</p>
-            </div>
-            <div className="image-card">
-              <div className='image-wrap'>
-                <img
-                  src="https://m.media-amazon.com/images/I/71jmhrRaSmL._AC_UF226,226_FMjpg_.jpg"
-                  alt="1"
-                  className="responsive-image"
-                  onMouseEnter={(e) => { rotateImage(e.target, true) }}
-                  onMouseLeave={(e) => { rotateImage(e.target, false) }}
-                />
-              </div>
-              <p className="image-text">Something For Siblings?</p>
-            </div>
-            <div>
-              <div className='image-wrap'>
-                <img
-                  src="https://m.media-amazon.com/images/I/71KXIckY8PL._AC_UF226,226_FMjpg_.jpg"
-                  alt="1"
-                  className="responsive-image"
-                  onMouseEnter={(e) => { rotateImage(e.target, true) }}
-                  onMouseLeave={(e) => { rotateImage(e.target, false) }}
-                />
-              </div>
-              <p className="image-text">Or For Family?</p>
-            </div>
+      <Carousel
+       selectedItem={currentIndex}
+       onChange={setCurrentIndex}>
+      {images.map((image, index) => (
+        <div key={index}>
+          <img src={image} alt={`Slide ${index}`} />
+        </div>
+      ))}
+    </Carousel>
+    </Box>
+    <DIV1>
+    <Box className="section-container" backgroundColor="gray.700">
+      <Text className="section-title">
+        Elevate Your Style, <br /> Embrace the Extraordinary.
+      </Text>
+      <Text className="section-text">
+        Pioneering the fashion frontier, our platform brings together style enthusiasts, designers, and brands, igniting a revolution in unique, ownable fashion finds.
+      </Text>
+      <Button className="section-button">
+        Shop Now
+      </Button>
+    </Box>
+    </DIV1>
+    <DIV>
+    <Box textAlign="center" padding="2rem">
+  <Text
+    fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+    fontWeight="bold"
+    color="green.500"
+  >
+    We Got You Covered
+  </Text>
+</Box>
+<DIV10>
+<div className="image-container">
+        <div>
+          <div className='image-wrap'>
+          <img
+            src="https://m.media-amazon.com/images/I/71etIJtcrBL._AC_UF226,226_FMjpg_.jpg"
+            alt="1"
+            className="responsive-image"
+            onMouseEnter={(e)=>{rotateImage(e.target, true)}}
+            onMouseLeave={(e)=>{rotateImage(e.target, false)}}
+          />
           </div>
-
+          <p className="image-text">Something For Partner?</p>
+        </div>
+        <div className="image-card">
+        <div className='image-wrap'>
+          <img
+            src="https://m.media-amazon.com/images/I/71jmhrRaSmL._AC_UF226,226_FMjpg_.jpg"
+            alt="1"
+            className="responsive-image"
+            onMouseEnter={(e)=>{rotateImage(e.target, true)}}
+            onMouseLeave={(e)=>{rotateImage(e.target, false)}}
+          />
+          </div>
+          <p className="image-text">Something For Siblings?</p>
+        </div>
+        <div>
+        <div className='image-wrap'>
+          <img
+            src="https://m.media-amazon.com/images/I/71KXIckY8PL._AC_UF226,226_FMjpg_.jpg"
+            alt="1"
+            className="responsive-image"
+            onMouseEnter={(e)=>{rotateImage(e.target, true)}}
+            onMouseLeave={(e)=>{rotateImage(e.target, false)}}
+          />
+          </div>
           <p className="image-text">Or For Family?</p>
         </div>
       </div>
@@ -416,145 +413,56 @@ useEffect(() => {
           w="100%"
           onClick={() => handletab('female')}
           _selected={{ bg: 'green.500', color: 'white' }}
-
         >
-          Top Brands From Around The Globe
-        </Text>
-      </Box>
-      <div style={imageContainerStyles}>
-        {images2.map((imagep, index) => (
-          <Imagep key={index} href="#">
-            <Image src={imagep} alt={`Image ${index + 1}`} />
-          </Imagep>
-        ))}
-      </div>
-      <div>
-        <Box textAlign="center" padding="2rem">
-          <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }} fontWeight="bold" color="green.500">
-            TOP INTERESTING
-          </Text>
-          <Text
-            fontSize={{ base: "md", md: "lg", lg: "xl" }}
-            color="gray.600"
-            mt="1rem"
-          >
-            Browse the collection of our dark best-selling and top interesting products.
-            You’ll definitely find what you are looking for.
-          </Text>
-        </Box>
-        <Tabs
-          isFitted
-          isLazy
-          variant="enclosed"
-          colorScheme="blue"
-          alignContent="center"
-          w="80%"
-          margin="auto"
+          Women
+        </Tab>
+        <Tab
+          w="100%"
+          onClick={() => handletab('kids')}
+          _selected={{ bg: 'green.500', color: 'white' }}
         >
-          <TabList
-            w="100%"
-            fontSize="xl"
-            display="flex"
-            justifyContent="space-between"
-            bg="gray.200"
-            borderRadius="md"
-          >
-            <Tab
-              w="100%"
-              onClick={() => handletab('male')}
-              _selected={{ bg: 'green.500', color: 'white' }}
-            >
-              Men
-            </Tab>
-            <Tab
-              w="100%"
-              onClick={() => handletab('female')}
-              _selected={{ bg: 'green.500', color: 'white' }}
-            >
-              Women
-            </Tab>
-            <Tab
-              w="100%"
-              onClick={() => handletab('kids')}
-              _selected={{ bg: 'green.500', color: 'white' }}
-            >
-              Kids
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <TABDIV>
-                <div className="card-carousel" >
-                  <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
-                </div>
-                {currentPage > 0 && (
-                  <button className="prev-button" onClick={handlePrevPage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z" /></svg>
-                  </button>
-                )}
-                {currentPage < totalPages - 1 && (
-                  <button className="next-button" onClick={handleNextPage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z" /></svg>
-                  </button>
-                )}
-              </TABDIV>
-            </TabPanel>
-            <TabPanel>
-              <TABDIV>
-                <div className="card-carousel" >
-                  <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
-                </div>
-                {currentPage > 0 && (
-                  <button className="prev-button" onClick={handlePrevPage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z" /></svg>
-                  </button>
-                )}
-                {currentPage < totalPages - 1 && (
-                  <button className="next-button" onClick={handleNextPage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z" /></svg>
-                  </button>
-                )}
-              </TABDIV>
-            </TabPanel>
-            <TabPanel>
-              <TABDIV>
-                <div className="card-carousel" >
-                  <Grid templateColumns={['repeat(1, 1fr)', 'repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
-                </div>
-                {currentPage > 0 && (
-                  <button className="prev-button" onClick={handlePrevPage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z" /></svg>
-                  </button>
-                )}
-                {currentPage < totalPages - 1 && (
-                  <button className="next-button" onClick={handleNextPage}>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z" /></svg>
-                  </button>
-                )}
-              </TABDIV>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </div>
-      <DIV5>
-        <div className="image-container">
-          <div className="image-wrapper">
-            <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-man.jpg" alt="1" className="animated-image" />
-            <div className="overlay">
-              <div className="text">HOME TO BRANDS FROM AROUND THE WORLD</div>
-            </div>
+          Kids
+        </Tab>
+      </TabList>
+        <TabPanels>
+        <TabPanel>
+        <TABDIV>
+        <div className="card-carousel" >
+          <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
           </div>
-          <div className="image-wrapper">
-            <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-x.jpg" alt=" 2" className="animated-image" />
-            <div className="overlay">
-              <div className="text">MIN 30% OFF ON ALL PRODUCTS</div>
-            </div>
+      {currentPage > 0 && (
+        <button className="prev-button" onClick={handlePrevPage}>
+         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
+        </button>
+      )}
+      {currentPage < totalPages - 1 && (
+        <button className="next-button" onClick={handleNextPage}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
+        </button>
+      )}
+        </TABDIV>
+        </TabPanel>
+          <TabPanel>
+          <TABDIV>
+          <div className="card-carousel" >
+          <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
           </div>
-          <div className="image-wrapper">
-            <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-girl.jpg" alt=" 3" className="animated-image" />
-            <div className="overlay">
-              <div className="text">BRACE YOURSELF WINTER 2023 SALE IS HERE</div>
-            </div>
+          {currentPage > 0 && (
+        <button className="prev-button" onClick={handlePrevPage}>
+         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
+        </button>
+      )}
+      {currentPage < totalPages - 1 && (
+        <button className="next-button" onClick={handleNextPage}>
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
+        </button>
+      )}
+    </TABDIV>
+          </TabPanel>
+          <TabPanel>
+          <TABDIV>
+          <div className="card-carousel" >
+          <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
           </div>
           {currentPage > 0 && (
         <button className="prev-button" onClick={handlePrevPage}>
@@ -664,180 +572,117 @@ useEffect(() => {
             boxShadow="md"
             mb="4"
             textAlign="left"
-
           >
-            Best In The Business
-          </Text>
-        </Box>
-        <div className='maindiv'>
-
-          <div>
-            <h2>1.</h2>
-            <h3>Place Order</h3>
-            <h4>Explore our vast selection of products to make your order truly unique.</h4>
-            <button>Read More</button>
-          </div>
-          <div>
-            <h2>2.</h2>
-            <h3>Payment process</h3>
-            <h4>Enjoy a seamless and secure payment process for your fashion choices.</h4>
-            <button>Read More</button>
-          </div>
-          <div>
-            <h2>3.</h2>
-            <h3>24 Hours Delivery</h3>
-            <h4>Experience lightning-fast 24-hour delivery for your fashion desires</h4>
-            <button>Read More</button>
-          </div>
-        </div>
-      </DIV6>
-      <DIV7>
-        <div>
-          <Box textAlign="center" py="4" color="black">
-            <Text
-              color="green.500"
-              fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
-              fontWeight="bold"
-            >
-              Our Blogs
+            <Image src={blog.image} alt={blog.title} className="image" />
+            <Text fontSize="lg" fontWeight="bold" mt="2">
+              {blog.title}
             </Text>
-            <Text
-              fontSize={{ base: "md", md: "lg", lg: "xl" }}
-              color="black"
-              mt="1rem"
-            >
-              We explore the world of fashion every month and bring the best stories from around the world for our readers.
+            <Text fontSize="sm" color="gray.600">
+              {blog.date}
+            </Text>
+            <Text fontSize="md" mt="2">
+              {blog.desc}
+            </Text>
+            <Text fontSize="sm" color="teal.500" mt="2">
+              Continue reading...
             </Text>
           </Box>
-          <div className="blog-container">
-            <div className="navigation">
-              {currentPage1 > 0 && (
-                <button className="prev-button" onClick={prevSlide}>
-                  {`<`}
-                </button>
-              )}
-              <div className="blog-slides">
-                {currentData.map((blog, index) => (
-                  <Box
-                    key={index}
-                    className="blog"
-                    borderWidth="1px"
-                    borderRadius="md"
-                    p="4"
-                    boxShadow="md"
-                    mb="4"
-                    textAlign="left"
-                  >
-                    <Image src={blog.image} alt={blog.title} className="image" />
-                    <Text fontSize="lg" fontWeight="bold" mt="2">
-                      {blog.title}
-                    </Text>
-                    <Text fontSize="sm" color="gray.600">
-                      {blog.date}
-                    </Text>
-                    <Text fontSize="md" mt="2">
-                      {blog.desc}
-                    </Text>
-                    <Text fontSize="sm" color="teal.500" mt="2">
-                      Continue reading...
-                    </Text>
-                  </Box>
-                ))}
-              </div>
-              {currentPage1 < bloginfo.length - blogsPerPage && (
-                <button className="next-button" onClick={nextSlide}>
-                  {`>`}
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      </DIV7>
-      <Box backgroundColor="gray.800" color="white" justifyContent={"space-around"}>
-        <Container maxW="container.xl" py="8">
-          <Flex justifyContent="space-between" flexWrap="wrap">
-            <Box flexBasis={{ base: '100%', md: '30%' }} mb={{ base: '4', md: '0' }}>
-              <Text fontSize="xl" fontWeight="bold" align={"start"}>clickit</Text>
-              <Text fontSize={"lg"} align={"start"} mt={"10px"}>Discover globally renowned brands at incredibly competitive prices, with swift delivery right to your doorstep.</Text>
-              <Text fontSize={"sm"} align={"start"} mt={"10px"}>Shop 2, Trillium Mall, Medical Square, Kurla, Mumbai-400070</Text>
+        ))}
+      </div>
+        {currentPage1 < bloginfo.length - blogsPerPage && (
+          <button className="next-button" onClick={nextSlide}>
+           {`>`}
+          </button>
+        )}
+      </div>
+    </div>
+</div>
+</DIV7>
+<Box backgroundColor="gray.800" color="white" justifyContent={"space-around"}>
+      <Container maxW="container.xl" py="8">
+        <Flex justifyContent="space-between" flexWrap="wrap">
+          <Box flexBasis={{ base: '100%', md: '30%' }} mb={{ base: '4', md: '0' }}>
+            <Text fontSize="xl" fontWeight="bold" align={"start"}>clickit</Text>
+            <Text fontSize={"lg"} align={"start"} mt={"10px"}>Discover globally renowned brands at incredibly competitive prices, with swift delivery right to your doorstep.</Text>
+            <Text fontSize={"sm"}  align={"start"} mt={"10px"}>Shop 2, Trillium Mall, Medical Square, Kurla, Mumbai-400070</Text>
+          </Box>
+          <Box  m={"10px"}>
+  <Text fontWeight="bold" mb="2" align={"start"} >Quick Links</Text>
+  <Flex flexDirection="column" align={"start"}>
+    <Box mb="2">
+      <Link href="#">Home</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">About Us</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Delivery Info</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Conditions</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Order Tracking</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">My Account</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">My Wishlist</Link>
+    </Box>
+    <Box mb="2">
+      <Link href="#">Careers</Link>
+    </Box>
+  </Flex>
+</Box>
+          <Box flexBasis={{ base: '100%', md: '25%' }} mb={{ base: '4', md: '0' }}>
+            <Text fontWeight="bold" mb="2" align={"start"} textAlign={'center'} w={'80%'}>Latest Posts</Text>
+            <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
+              <Text className="title">Indian handlooms</Text>
+              <Text className="date">Sept 17, 2023</Text>
             </Box>
-            <Box m={"10px"}>
-              <Text fontWeight="bold" mb="2" align={"start"} >Quick Links</Text>
-              <Flex flexDirection="column" align={"start"}>
-                <Box mb="2">
-                  <Link href="#">Home</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">About Us</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">Delivery Info</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">Conditions</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">Order Tracking</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">My Account</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">My Wishlist</Link>
-                </Box>
-                <Box mb="2">
-                  <Link href="#">Careers</Link>
-                </Box>
-              </Flex>
+            <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
+              <Text className="title">Paris Fashion Week</Text>
+              <Text className="date">August 17, 2023</Text>
             </Box>
-            <Box flexBasis={{ base: '100%', md: '25%' }} mb={{ base: '4', md: '0' }}>
-              <Text fontWeight="bold" mb="2" align={"start"} textAlign={'center'} w={'80%'}>Latest Posts</Text>
-              <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
-                <Text className="title">Indian handlooms</Text>
-                <Text className="date">Sept 17, 2023</Text>
-              </Box>
-              <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
-                <Text className="title">Paris Fashion Week</Text>
-                <Text className="date">August 17, 2023</Text>
-              </Box>
-              <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
-                <Text className="title">Gucci expanding in India</Text>
-                <Text className="date">Feb 17, 2023</Text>
-              </Box>
+            <Box align={"start"} mt={'10px'} border={'1px'} textAlign={'center'} w={'80%'}>
+              <Text className="title">Gucci expanding in India</Text>
+              <Text className="date">Feb 17, 2023</Text>
             </Box>
-
-            <Box flexBasis={{ base: '100%', md: '25%' }} mb={{ base: '4', md: '0' }}>
-              <Text fontWeight="bold" mb="2">Tags</Text>
-              <Flex flexWrap="wrap">
-                <Button variant="solid" size="sm" mr="2" mb="2">accessories</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">black</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">fashion</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">menfashion</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">sale</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">menfashion</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">jacket</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">denim</Button>
-                <Button variant="solid" size="sm" mr="2" mb="2">shirt</Button>
-              </Flex>
-            </Box>
-          </Flex>
-        </Container>
-        <Box backgroundColor="gray.700" textAlign="center" py={['2', '4']}>
-          <Container maxW="container.xl" py={['2', '4']}>
-            <Flex justifyContent={['center', 'space-between']} alignItems="center" flexWrap="wrap">
-              <Text fontSize="sm" color="white" textAlign={['center', 'left']} mb={['2', '0']}>Copyright 2023 of clickit</Text>
-              <Flex alignItems="center" justifyContent="flex-end">
-                <Text fontSize="sm" color="white" mr="2">Payments Accepted</Text>
-                <DIVIMG>
-                  <Image className='img' src="https://cdn.myshoptet.com/usr/www.led-grower.eu/user/documents/upload/img/logo-platebni-karty.png" alt="payments" />
-                </DIVIMG>
-              </Flex>
+          </Box>
+          
+          <Box flexBasis={{ base: '100%', md: '25%' }} mb={{ base: '4', md: '0' }}>
+            <Text fontWeight="bold" mb="2">Tags</Text>
+            <Flex flexWrap="wrap">
+              <Button variant="solid" size="sm" mr="2" mb="2">accessories</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">black</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">fashion</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">menfashion</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">sale</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">menfashion</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">jacket</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">denim</Button>
+              <Button variant="solid" size="sm" mr="2" mb="2">shirt</Button>
             </Flex>
-          </Container>
-        </Box>
-      </Box>
+          </Box>
+        </Flex>
+      </Container>
+      <Box backgroundColor="gray.700" textAlign="center" py={['2', '4']}>
+      <Container maxW="container.xl" py={['2', '4']}>
+        <Flex justifyContent={['center', 'space-between']} alignItems="center" flexWrap="wrap">
+          <Text fontSize="sm" color="white" textAlign={['center', 'left']} mb={['2', '0']}>Copyright 2023 of clickit</Text>
+          <Flex alignItems="center" justifyContent="flex-end">
+            <Text fontSize="sm" color="white" mr="2">Payments Accepted</Text>
+            <DIVIMG>
+            <Image className='img'  src="https://cdn.myshoptet.com/usr/www.led-grower.eu/user/documents/upload/img/logo-platebni-karty.png" alt="payments" />
+            </DIVIMG>
+          </Flex>
+        </Flex>
+      </Container>
+    </Box>
+    </Box>
     </>
-
+  
   )
 }
 const DIV = styled.div`
@@ -894,7 +739,7 @@ h1 {
 }
 `
 
-const DIV1 = styled.div`
+const DIV1=styled.div`
 .section-container {
   text-align: center;
   padding: 2rem;
@@ -976,7 +821,7 @@ const imageContainerStyles = {
   gridTemplateColumns: 'repeat(6, 1fr)',
   gap: '1rem',
   padding: '1rem',
-
+  
 };
 const responsiveImageStyles = {
   width: '100%',
@@ -993,7 +838,7 @@ const Image = styled.img`
     transform: scale(1.1);
   }
 `
-const CARDDIV = styled.div`
+const CARDDIV=styled.div`
 .card {
   display: flex;
   flex-direction: column;
@@ -1031,7 +876,7 @@ const CARDDIV = styled.div`
 }
 
 `
-const TABDIV = styled.div`
+const TABDIV=styled.div`
  .card-carousel{
   display: flex;
   width: 100%;
@@ -1044,7 +889,7 @@ const TABDIV = styled.div`
   }
  }
 `
-const DIV5 = styled.div`
+const DIV5=styled.div`
 .image-container {
   display: flex;
   width: 100%;
@@ -1131,7 +976,7 @@ const DIV5 = styled.div`
     }
   }
 `
-const DIV6 = styled.div`
+const DIV6=styled.div`
 
 .maindiv {
   background-color: #ffffff;
@@ -1209,7 +1054,7 @@ button:hover {
   }
 }
 `
-const DIV7 = styled.div`
+const DIV7=styled.div`
 .blog-container {
   display: flex;
   flex-direction: column;
@@ -1327,7 +1172,7 @@ const DIV7 = styled.div`
 }
 }
 `
-const DIVIMG = styled.div`
+const DIVIMG=styled.div`
 .img{
   width: 15%;
 }
@@ -1335,7 +1180,6 @@ const DIVIMG = styled.div`
 `
 const DIV10=styled.div`
 margin-bottom: 50px;
-
   .image-container {
    text-align: center;
 }
