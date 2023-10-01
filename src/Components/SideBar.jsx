@@ -69,7 +69,7 @@ export const SideBar = () => {
 setOrder(value)
     }
     return (
-        <div style={{border:'1px solid white', marginTop:'10px',textAlign:'justify',padding:'50px',justifyContent:'center'}}>
+        <div style={{border:'1px solid white',boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px", marginTop:'10px',textAlign:'justify',padding:'70px',justifyContent:'center'}}>
             <div >
                 <h4>Filter By Brand</h4>
                 <br />
