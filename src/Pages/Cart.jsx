@@ -84,7 +84,7 @@ const Cart = () => {
                 </Text>
                 <Text color="gray.500">{el.brand}</Text>
                 <Text color="gray.700" fontSize="xl" mt="2">
-                  ${el.price}
+                  Rs.{el.price}
                 </Text>
               </Box>
 

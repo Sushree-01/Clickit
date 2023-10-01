@@ -4,7 +4,7 @@ import { FETCH_PRODUCTS_FAILURE, FETCH_PRODUCTS_REQUEST, FETCH_PRODUCTS_SUCCESS 
 export const getProduct =(obj)=> (dispatch) => {
   // Write logic here
   dispatch({type:FETCH_PRODUCTS_REQUEST})
-  axios.get(`https://sushreebackendapi.onrender.com/products`,obj)
+  axios.get(`https://65151b4adc3282a6a3cddbd1.mockapi.io/products`,obj)
   .then((res)=>{
     dispatch({type:FETCH_PRODUCTS_SUCCESS,payload:res.data})
   })

@@ -31,7 +31,7 @@ const Login = () => {
                     duration: 1000,
                     isClosable: true,
                     onCloseComplete: () => {
-                        Navigate(-1);
+                        Navigate("/");
                     },
                 });
             } else {

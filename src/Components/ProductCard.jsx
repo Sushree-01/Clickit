@@ -48,7 +48,7 @@ const ProductCard = ({ product}) => {
         </Text>
         <Text color="gray.500">{brand}</Text>
         <Text color="gray.700" fontSize="xl" mt="2">
-          ${price}
+          Rs.{price}
         </Text>
       </Box>
 
