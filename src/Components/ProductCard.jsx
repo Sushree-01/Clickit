@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AddToCart } from '../Redux/Cart/action';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-const ProductCard = ({ product }) => {
+
  
 
 const ProductCard = ({ product}) => {
@@ -64,7 +64,7 @@ const ProductCard = ({ product}) => {
  
       <Button colorScheme="teal" mt="4" onClick={handleAddToCart}>
  
-      <Button colorScheme="teal" mt="4" >
+      {/* <Button colorScheme="teal" mt="4" > */}
  
         Add to Cart
       </Button>
