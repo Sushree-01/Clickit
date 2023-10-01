@@ -1,10 +1,15 @@
 import React from 'react';
 import { Box, Image, Text, Badge, Flex, Button } from '@chakra-ui/react';
+ 
 import { useDispatch, useSelector } from 'react-redux';
 import { AddToCart } from '../Redux/Cart/action';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const ProductCard = ({ product }) => {
+ 
+
+const ProductCard = ({ product}) => {
+ 
   const { brand, gender, id, image, name, price, rating } = product;
   const dispatch = useDispatch()
   let userId = localStorage.getItem("userid");
@@ -56,7 +61,11 @@ const ProductCard = ({ product }) => {
         </Box>
       </Flex>
 
+ 
       <Button colorScheme="teal" mt="4" onClick={handleAddToCart}>
+ 
+      <Button colorScheme="teal" mt="4" >
+ 
         Add to Cart
       </Button>
     </Box>
