@@ -69,15 +69,15 @@ const Navigate=useNavigate()
   {isLargerThanTablet && (
     <>
       <Spacer />
-      <Box>
+      <Box display={'flex'} width={"30%"} justifyContent={'space-around'}>
         <Link href="/product" _hover={{ color: 'teal.500' }} marginX="2">
-          New Arrivals
+          Store
         </Link>
         <Link href="/cart" _hover={{ color: 'teal.500' }} marginX="2" >
           Cart
         </Link>
         <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">
-          Your Profile
+          Profile
         </Link>
         <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">
           Wishlist

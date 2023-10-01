@@ -72,23 +72,27 @@ const [currentIndex, setCurrentIndex] = useState(0);
 const [cardsData,setcarddata]=useState([])
 const [activeCategory, setActiveCategory] = useState("male");
 const[filtereddata,setfiltereddata]=useState([])
-const [currentProductIndex, setCurrentProductIndex] = useState(0);
+const [currentProductIndex1, setCurrentProductIndex1] = useState(0);
+const [currentProductIndex2, setCurrentProductIndex2] = useState(5);
 const fontSize = useBreakpointValue({ base: "10px", md: "md", lg: "lg" });
 const imageSize = useBreakpointValue({ base: "100%", md: "80%", lg: "60%" });
 useEffect(() => {
-  axios.get(`https://65151b4adc3282a6a3cddbd1.mockapi.io/products`)
-  .then((res)=>{
-    setcarddata(res.data)
-    setfiltereddata(res.data.filter((e)=>e.gender===activeCategory))
-  })
-  .catch((err)=>[
-    console.log(err)
-  ])
+  // axios.get(`https://65151b4adc3282a6a3cddbd1.mockapi.io/products`)
+  // .then((res)=>{
+    // setcarddata(res.data)
+    setfiltereddata(data.filter((e)=>e.gender===activeCategory))
+ // })
+ // .catch((err)=>[
+  //  console.log(err)
+ // ])
   const interval = setInterval(() => {
     goToNextSlide();
-    setCurrentProductIndex((prevIndex) =>
+    setCurrentProductIndex1((prevIndex) =>
     prevIndex >= data.length - 1 ? 0 : prevIndex + 1
   );
+  setCurrentProductIndex2((prevIndex) =>
+  prevIndex >= data.length - 1 ? 0 : prevIndex + 1
+);
   }, 5000);
 
   return () => {
@@ -309,24 +313,24 @@ const [currentPage1, setCurrentPage1] = useState(0);
       cursor={"pointer"}
     >
       <Image
-        src={data[currentProductIndex].image}
-        alt={data[currentProductIndex].name}
+        src={data[currentProductIndex1].image}
+        alt={data[currentProductIndex1].name}
         style={{ width: imageSize, alignSelf: 'center', height: 'auto' }}
         
       />
       <Text className='name' fontWeight="bold" mt="2">
-        {data[currentProductIndex].name}
+        {data[currentProductIndex1].name}
       </Text>
       <Text color="gray.600" className='brand'>
-        {data[currentProductIndex].brand}
+        {data[currentProductIndex1].brand}
       </Text>
       <Text display="flex" textAlign="center" className='rating'>
       <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"/></svg>
-        {data[currentProductIndex].rating}
+        {data[currentProductIndex1].rating}
       </Text>
       <Text color="teal.500" mt="2" display="flex" className='price'>
       <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>
-        {data[currentProductIndex].price}
+        {data[currentProductIndex1].price}
       </Text>
     </Box></div>
     <div><Text fontSize={"xl"} mb={'20px'} color={'green.400'}  fontWeight={'bold'}>Just Arrived</Text>
@@ -345,24 +349,24 @@ const [currentPage1, setCurrentPage1] = useState(0);
       cursor={"pointer"}
     >
       <Image
-        src={data[currentProductIndex+2].image}
-        alt={data[currentProductIndex+2].name}
+        src={data[currentProductIndex2].image}
+        alt={data[currentProductIndex2].name}
         style={{ width: imageSize, alignSelf: 'center', height: 'auto' }}
         
       />
       <Text className='name' fontWeight="bold" mt="2">
-        {data[currentProductIndex+2].name}
+        {data[currentProductIndex2].name}
       </Text>
       <Text color="gray.600" className='brand'>
-        {data[currentProductIndex+2].brand}
+        {data[currentProductIndex2].brand}
       </Text>
       <Text display="flex" textAlign="center" className='rating'>
       <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"/></svg>
-        {data[currentProductIndex+2].rating}
+        {data[currentProductIndex2].rating}
       </Text>
       <Text color="teal.500" mt="2" display="flex" className='price'>
       <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>
-        {data[currentProductIndex+2].price}
+        {data[currentProductIndex2].price}
       </Text>
     </Box></div>
      </DIVFADE>
