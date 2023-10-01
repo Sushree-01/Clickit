@@ -9,10 +9,7 @@ import {
   Tab,
   TabPanels,
   TabPanel,
-  Stack,
-  Divider,
-  Heading,
-  ButtonGroup,Grid,
+  Grid,
   Link,Container
 
 } from "@chakra-ui/react";
@@ -81,13 +78,13 @@ useEffect(() => {
   .catch((err)=>[
     console.log(err)
   ])
-  // const interval = setInterval(() => {
-  //   goToNextSlide();
-  // }, 1000);
+  const interval = setInterval(() => {
+    goToNextSlide();
+  }, 2000);
 
-  // return () => {
-  //   clearInterval(interval);
-  // };
+  return () => {
+    clearInterval(interval);
+  };
 }, [activeCategory]);
 const goToNextSlide = () => {
   setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -129,16 +126,33 @@ const renderCards = () => {
 
   return filtereddata.slice(startIndex, endIndex).map((card) => (
      <CARDDIV key={card.id}>
-      <div  className='card'>
-     <img src={card.image} className='card-image' alt={card.name}/>
-     <p className='card-title'>{card.name}</p>
-     <p className='card-brand'>{card.brand}</p>
-     <p className='card-gender'>{card.gender}</p>
-     <p className='card-rating'>{card.rating}</p>
-     <p className='card-price'>{card.price}</p>
-     <button>Add To Cart</button>
-     <button>Buy Now</button>
-      </div>
+        <Box
+    className="card"
+    borderWidth="1px"
+    borderRadius="md"
+    p="4"
+    boxShadow="md"
+    mb="4"
+    textAlign="left"
+  >
+    <Image src={card.image} alt={card.name} className="image" />
+    <Text className='name' fontWeight="bold" mt="2">
+      {card.name}
+    </Text>
+    <Text color="gray.600" className='brand'>
+      {card.brand}
+    </Text>
+    <Text display="flex" textAlign={'center'} className='rating'>
+    <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"/></svg>{card.rating}
+    </Text>
+    <Text color="teal.500" mt="2" display="flex" className='price'>
+    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>{card.price}
+    </Text>
+    <div className='buttons'>
+      <button className='buttonadd'>Add</button>
+      <button className='buttonbuy'>Buy</button>
+    </div>
+  </Box>
      </CARDDIV>
   ))
 };
@@ -155,11 +169,25 @@ const [currentPage1, setCurrentPage1] = useState(0);
       setCurrentPage1(currentPage1 - blogsPerPage);
     }
   };
+  function rotateImage(element, rotate) {
+    if (rotate) {
+      element.style.transform = 'rotate(10deg)';
+      element.parentNode.style.borderRadius = '50%';
+      element.parentNode.style.overflow = 'hidden';
+    } else {
+      element.style.transform = 'rotate(0deg)';
+      element.parentNode.style.borderRadius = '0';
+      element.parentNode.style.overflow = 'visible';
+    }
+  }
   const currentData = bloginfo.slice(currentPage1, currentPage1 + blogsPerPage);
   return (
     <>
-      <Box position="relative" overflow="hidden" onTouchMove={handleSwipe}>
-      <Carousel>
+    <script src="https://kit.fontawesome.com/6374a7542c.js" crossorigin="anonymous"></script>
+      <Box position="relative" overflow="hidden" onTouchMove={handleSwipe} mt={"20px"}>
+      <Carousel
+       selectedItem={currentIndex}
+       onChange={setCurrentIndex}>
       {images.map((image, index) => (
         <div key={index}>
           <img src={image} alt={`Slide ${index}`} />
@@ -181,52 +209,66 @@ const [currentPage1, setCurrentPage1] = useState(0);
     </Box>
     </DIV1>
     <DIV>
-      <h1>We Got You Covered</h1>
-      <div className="image-container">
+    <Box textAlign="center" padding="2rem">
+  <Text
+    fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+    fontWeight="bold"
+    color="green.500"
+  >
+    We Got You Covered
+  </Text>
+</Box>
+<DIV10>
+<div className="image-container">
         <div>
+          <div className='image-wrap'>
           <img
             src="https://m.media-amazon.com/images/I/71etIJtcrBL._AC_UF226,226_FMjpg_.jpg"
             alt="1"
             className="responsive-image"
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'rotate(10deg)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'rotate(0deg)';
-            }}
+            onMouseEnter={(e)=>{rotateImage(e.target, true)}}
+            onMouseLeave={(e)=>{rotateImage(e.target, false)}}
           />
+          </div>
           <p className="image-text">Something For Partner?</p>
         </div>
         <div className="image-card">
+        <div className='image-wrap'>
           <img
             src="https://m.media-amazon.com/images/I/71jmhrRaSmL._AC_UF226,226_FMjpg_.jpg"
-            alt="2"
+            alt="1"
             className="responsive-image"
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'rotate(10deg)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'rotate(0deg)';
-            }}
+            onMouseEnter={(e)=>{rotateImage(e.target, true)}}
+            onMouseLeave={(e)=>{rotateImage(e.target, false)}}
           />
+          </div>
           <p className="image-text">Something For Siblings?</p>
         </div>
         <div>
+        <div className='image-wrap'>
           <img
             src="https://m.media-amazon.com/images/I/71KXIckY8PL._AC_UF226,226_FMjpg_.jpg"
-            alt="3"
+            alt="1"
             className="responsive-image"
-            onMouseEnter={(e) => {
-              e.target.style.transform = 'rotate(10deg)';
-            }}
-            onMouseLeave={(e) => {
-              e.target.style.transform = 'rotate(0deg)';
-            }}
+            onMouseEnter={(e)=>{rotateImage(e.target, true)}}
+            onMouseLeave={(e)=>{rotateImage(e.target, false)}}
           />
+          </div>
           <p className="image-text">Or For Family?</p>
         </div>
       </div>
+</DIV10>
+      
     </DIV>
+    <Box textAlign="center" padding="2rem">
+  <Text
+    fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+    fontWeight="bold"
+    color="green.500"
+  >
+    Top Brands From Around The Globe
+  </Text>
+</Box>
     <div style={imageContainerStyles}>
       {images2.map((imagep, index) => (
         <Imagep key={index} href="#">
@@ -235,20 +277,58 @@ const [currentPage1, setCurrentPage1] = useState(0);
       ))}
     </div>
     <div>
-      <Tabs
-        isFitted
-        isLazy
-        variant="enclosed"
-        colorScheme="blue"
-        alignContent="center"
-        w="80%"
-        margin="auto"
+    <Box textAlign="center" padding="2rem">
+  <Text fontSize={{ base: "2xl", md: "4xl", lg: "5xl" }} fontWeight="bold" color="green.500">
+    TOP INTERESTING
+  </Text>
+  <Text
+    fontSize={{ base: "md", md: "lg", lg: "xl" }}
+    color="gray.600"
+    mt="1rem"
+  >
+    Browse the collection of our dark best-selling and top interesting products.
+    You’ll definitely find what you are looking for.
+  </Text>
+</Box>
+<Tabs
+      isFitted
+      isLazy
+      variant="enclosed"
+      colorScheme="blue"
+      alignContent="center"
+      w="80%"
+      margin="auto"
+    >
+      <TabList
+        w="100%"
+        fontSize="xl"
+        display="flex"
+        justifyContent="space-between"
+        bg="gray.200"
+        borderRadius="md"
       >
-        <TabList w="100%" fontSize={'xl'}>
-          <Tab  w="100%"  onClick={() => handletab('male')}>Men</Tab>
-          <Tab  w="100%" onClick={() => handletab("female")}>Women</Tab>
-          <Tab  w="100%" onClick={() => handletab("kids")}>Kids</Tab>
-        </TabList>
+        <Tab
+          w="100%"
+          onClick={() => handletab('male')}
+          _selected={{ bg: 'green.500', color: 'white' }}
+        >
+          Men
+        </Tab>
+        <Tab
+          w="100%"
+          onClick={() => handletab('female')}
+          _selected={{ bg: 'green.500', color: 'white' }}
+        >
+          Women
+        </Tab>
+        <Tab
+          w="100%"
+          onClick={() => handletab('kids')}
+          _selected={{ bg: 'green.500', color: 'white' }}
+        >
+          Kids
+        </Tab>
+      </TabList>
         <TabPanels>
         <TabPanel>
         <TABDIV>
@@ -257,12 +337,12 @@ const [currentPage1, setCurrentPage1] = useState(0);
           </div>
       {currentPage > 0 && (
         <button className="prev-button" onClick={handlePrevPage}>
-          Previous
+         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
         </button>
       )}
       {currentPage < totalPages - 1 && (
         <button className="next-button" onClick={handleNextPage}>
-          Next
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
         </button>
       )}
         </TABDIV>
@@ -272,14 +352,14 @@ const [currentPage1, setCurrentPage1] = useState(0);
           <div className="card-carousel" >
           <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
           </div>
-      {currentPage > 0 && (
+          {currentPage > 0 && (
         <button className="prev-button" onClick={handlePrevPage}>
-          Previous
+         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
         </button>
       )}
       {currentPage < totalPages - 1 && (
         <button className="next-button" onClick={handleNextPage}>
-          Next
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
         </button>
       )}
     </TABDIV>
@@ -289,14 +369,14 @@ const [currentPage1, setCurrentPage1] = useState(0);
           <div className="card-carousel" >
           <Grid templateColumns={['repeat(1, 1fr)','repeat(1, 1fr)', 'repeat(3, 1fr)']} gap={4}>{renderCards()}</Grid>
           </div>
-      {currentPage > 0 && (
+          {currentPage > 0 && (
         <button className="prev-button" onClick={handlePrevPage}>
-          Previous
+         <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/></svg>
         </button>
       )}
       {currentPage < totalPages - 1 && (
         <button className="next-button" onClick={handleNextPage}>
-          Next
+          <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>
         </button>
       )}
     </TABDIV>
@@ -327,7 +407,15 @@ const [currentPage1, setCurrentPage1] = useState(0);
   </div>
   </DIV5>
   <DIV6>
-  <h1>Best In The Business</h1>
+  <Box textAlign="center" padding="2rem">
+  <Text
+    fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+    fontWeight="bold"
+    color="green.500"
+  >
+    Best In The Business
+  </Text>
+</Box>
     <div className='maindiv'>
       
     <div>
@@ -352,10 +440,22 @@ const [currentPage1, setCurrentPage1] = useState(0);
   </DIV6>
   <DIV7>
   <div>
-  <p className="heading">Our Blogs</p>
-  <p className="subheading">
+  <Box textAlign="center" py="4" color="black">
+  <Text
+  color="green.500"
+    fontSize={{ base: "2xl", md: "3xl", lg: "4xl" }}
+    fontWeight="bold"
+  >
+    Our Blogs
+  </Text>
+  <Text
+    fontSize={{ base: "md", md: "lg", lg: "xl" }}
+    color="black"
+    mt="1rem"
+  >
     We explore the world of fashion every month and bring the best stories from around the world for our readers.
-  </p>
+  </Text>
+</Box>
   <div className="blog-container">
       <div className="navigation">
         {currentPage1 > 0 && (
@@ -365,13 +465,30 @@ const [currentPage1, setCurrentPage1] = useState(0);
         )}
          <div className="blog-slides">
         {currentData.map((blog, index) => (
-          <div key={index} className="blog">
-            <img className='image' src={blog.image} alt={blog.title} />
-            <p className="title">{blog.title}</p>
-            <p className="date">{blog.date}</p>
-            <p className="description">{blog.desc}</p>
-            <p className='continue'>Continue reading...</p>
-          </div>
+            <Box
+            key={index}
+            className="blog"
+            borderWidth="1px"
+            borderRadius="md"
+            p="4"
+            boxShadow="md"
+            mb="4"
+            textAlign="left"
+          >
+            <Image src={blog.image} alt={blog.title} className="image" />
+            <Text fontSize="lg" fontWeight="bold" mt="2">
+              {blog.title}
+            </Text>
+            <Text fontSize="sm" color="gray.600">
+              {blog.date}
+            </Text>
+            <Text fontSize="md" mt="2">
+              {blog.desc}
+            </Text>
+            <Text fontSize="sm" color="teal.500" mt="2">
+              Continue reading...
+            </Text>
+          </Box>
         ))}
       </div>
         {currentPage1 < bloginfo.length - blogsPerPage && (
@@ -476,12 +593,14 @@ const DIV = styled.div`
 }
 h1 {
   margin: 2rem 0;
+  font-size: 100px;
+  background-color: tomato;
 }
 .image-container {
   display: flex;
   justify-content: space-around;
   gap: 1rem;
-  font-size: 10px;
+  font-size: 100px;
   width: 80%;
   margin: auto;
 }
@@ -502,10 +621,17 @@ h1 {
   .image-container{
     font-size: 8px;
   }
+  h1{
+    font-size: 20px;
+  }
+
 }
 @media screen and (min-width: 500px) and (max-width: 1023px) {
   .image-container{
     font-size: 15px;
+  }
+  h1{
+    font-size: 30px;
   }
 }
 @media screen and (min-width: 1024px) {
@@ -534,7 +660,7 @@ const DIV1=styled.div`
   margin: auto;
 }
 .section-button {
-  border: 2px solid yellow;
+  border: 2px solid black;
   color: white;
   background-color: transparent;
   padding: 0.5rem 1rem;
@@ -544,7 +670,7 @@ const DIV1=styled.div`
 }
 .section-button:hover {
   transform: scale(1.1);
-  color: blue;
+  color: #000000;
 }
 @media screen and (max-width: 767px) {
   .section-title {
@@ -597,6 +723,7 @@ const imageContainerStyles = {
   gridTemplateColumns: 'repeat(6, 1fr)',
   gap: '1rem',
   padding: '1rem',
+  
 };
 const responsiveImageStyles = {
   width: '100%',
@@ -613,22 +740,53 @@ const Image = styled.img`
     transform: scale(1.1);
   }
 `;
+const H1=styled.h1`
+font-size: 50px;
+background-color: tomato;
+@media screen and (min-width: 767px) and (max-width: 1023px)  {
+  font-size: 20px;
+}
+@media screen and (min-width: 401px) and (max-width: 766px)  {
+  font-size: 15px;
+}
+@media screen and  (max-width: 400px)  {
+  font-size: 10px;
+}
+`
 const CARDDIV=styled.div`
 .card {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 80%;
-  margin: 0 auto;
+  margin: auto;
+}
+.buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttonadd,
+.buttonbuy {
+  background-color: #e7e7e7;
+  color: #000000;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.buttonadd:hover,
+.buttonbuy:hover {
+  background-color: #f53737;
 }
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .card {
-    width: 70%;
+    width: 80%;
   }
 }
 @media screen and (max-width: 767px) {
   .card {
-    width: 70%;
+    width: 80%;
   }
 }
 
@@ -736,8 +894,8 @@ const DIV5=styled.div`
 const DIV6=styled.div`
 
 .maindiv {
-  background-color: #000;
-  color: #fff;
+  background-color: #ffffff;
+  color: #000000;
   padding: 2rem;
   display: flex;
   justify-content: space-around;
@@ -760,8 +918,8 @@ h4{
 
 button {
   background-color: transparent;
-  color: #fff;
-  border: 2px solid #fff;
+  color: #000000;
+  border: 2px solid #000000;
   padding: 0.5rem 1rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -819,7 +977,7 @@ const DIV7=styled.div`
   margin-top: 20px;
   font-size: 80px;
   width: 100%;
-  background-color: black;
+  background-color: #ffffff;
 }
 .image{
   width: 100%;
@@ -852,9 +1010,9 @@ const DIV7=styled.div`
 .blog {
   flex: 0 0 31%;
   width: 100%;
-  background-color: black;
+  background-color: #ffffff;
   cursor: pointer;
-  color: #ffffff;
+  color: #000000;
   margin:10px;
   border: 2px solid white;
   border-radius: 10px;
@@ -878,23 +1036,23 @@ const DIV7=styled.div`
 
 .prev-button,
 .next-button {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
   border: none;
   padding: 10px 15px;
   cursor: pointer;
   font-size: 20%;
 }
 
-.prev-button:hover,
+/* .prev-button:hover,
 .next-button:hover {
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #000000;
 }
 .prev-button{
   bottom: 300px;
-  background-color: #000000;
-}
+  background-color: #ffffff;
+} */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .blog-container {
   display: flex;
@@ -903,7 +1061,8 @@ const DIV7=styled.div`
   margin-top: 20px;
   font-size: 50px;
   width: 100%;
-  background-color: black;
+  background-color: #ffffff;
+  color: #000000;
 }
 .blog-slides {
   display: flex;
@@ -923,7 +1082,8 @@ const DIV7=styled.div`
   margin-top: 20px;
   font-size: 30px;
   width: 100%;
-  background-color: black;
+  background-color: #ffffff;
+  color: #ffffff;
 }
 .blog-slides {
   display: flex;
@@ -941,4 +1101,25 @@ const DIVIMG=styled.div`
   width: 15%;
 }
 
+`
+const DIV10=styled.div`
+  .image-container {
+  text-align: center;
+}
+
+.image-wrap {
+  display: inline-block;
+  border: 2px solid #3498db; /* Border styles */ /* Initial border radius for a circular shape */
+  overflow: hidden; /* Hide overflow content when rotated */
+  transition: border-radius 0.3s ease-in-out; /* Smooth transition for border radius */
+}
+
+.responsive-image {
+  width: 226px;
+  height: 226px; /* Set your desired width and height */
+}
+
+.image-text {
+  text-align: center;
+}
 `

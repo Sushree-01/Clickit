@@ -1,11 +1,10 @@
-import React from 'react';
+ import React from 'react';
 import { Button, Flex, FormControl, FormLabel, Input, Stack, Avatar, Text, Link, useToast } from '@chakra-ui/react';
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch} from 'react-redux';
 import { LOGIN_SUCCESS } from "../Redux/Login/actionType"
-
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -45,7 +44,6 @@ const Login = () => {
                 });
             }
         } catch (error) {
-            console.log(error);
             toast({
                 title: 'Error Account Login.',
                 description: "Kindly Check Your Credential...",
@@ -78,7 +76,6 @@ const Login = () => {
                 <FormControl id="userName">
                     <Avatar size="xl" src="https://bit.ly/dan-abramov"></Avatar>
                 </FormControl>
-
                 <FormControl id="email" isRequired color="black">
                     <FormLabel>Email address</FormLabel>
                     <Input
@@ -135,5 +132,3 @@ const Login = () => {
     )
 };
 export default Login;
-
- 
