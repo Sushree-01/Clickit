@@ -14,9 +14,7 @@ export const removeFromCart = (userid, newCart) => (dispatch) => {
     axios.put(`https://6517e61b582f58d62d353538.mockapi.io/users/${userid}`, {
         cart: newCart
     })
-        // .then((res) => {
-        //     dispatch({ type: GET_CART_DATA, payload: res.data.cart })
-        // })
+       
 }
 
 export const AddTOCart = (userid,newData)=>(dispatch)=>{
