@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import store from "../Redux/store";
 import { useEffect } from "react";
-import { getcartData } from "../Redux/Cart/action";
+import { getcartData, removeFromCart } from "../Redux/Cart/action";
 import { Box, Image, Text, Badge, Flex} from '@chakra-ui/react';
 const Cart = () => {
   let userid = localStorage.getItem("userid");
@@ -15,6 +15,10 @@ const Cart = () => {
     margin: "auto"
   };
 
+  const handelRemove = (id)=>{
+    let newCart = cartData.filter((el)=>el.id!=id)
+    dispatch(removeFromCart(userid,newCart))
+  }
   useEffect(() => {
     dispatch(getcartData(userid))
   }, [])
@@ -55,6 +59,7 @@ const Cart = () => {
                 <Badge colorScheme="green">{el.rating} ★</Badge>
               </Box>
             </Flex>
+            <button onClick={()=>handelRemove(el.id)}>Remove</button>
           </Box>
           ))}
         </div>
