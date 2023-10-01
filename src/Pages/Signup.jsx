@@ -18,7 +18,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const carePillStyle = {
+  const clickitStyle = {
       fontFamily: 'Pacifico, cursive',
       fontSize: '1.5rem',
       textShadow: '2px 0px 0px #4299E1',
@@ -26,7 +26,8 @@ export default function SignUp() {
 
   const handleSubmit =  (e) => {
       e.preventDefault();
-      fetch(`https://64e9f297bf99bdcc8e672256.mockapi.io/PillReminder?email=${email}`)
+      console.log("click");
+      fetch(`https://6517e61b582f58d62d353538.mockapi.io/users?email=${email}`)
           .then(response => response.json())
           .then(data => {
               if (data.length > 0) {
@@ -42,12 +43,11 @@ export default function SignUp() {
                           SecureToken: "3a0f5131-cd12-4011-98fc-17d850be133a",
                           To: emailKey,
                           From: "senas17941@byorby.com",
-                          Subject: "Welcome to Pills Reminder, OTP verification",
+                          Subject: "Welcome to Clickit, OTP verification",
                           Body: emailbody
                       }).then(
                           message => {
                               if (message === "OK") {
-                                  alert("OTP sent to your email " + emailKey);
                                   Navigate("/verifyOTP", { state: { otp_val, email, name, password } })
                               }
                           }
@@ -65,59 +65,59 @@ export default function SignUp() {
           minH={'100vh'}
           align={'center'}
           justify={'center'}
-          bg="black"
+          bg="white"
       >
           <Stack
               spacing={4}
               w={'full'}
               maxW={'md'}
               bg="transparent"
-              border="2px solid #F9A70B"
+              border="2px solid black"
               rounded={'xl'}
               boxShadow={'lg'}
               p={6}
               my={12}>
-              <Text style={carePillStyle} fontSize="xl" fontWeight="bold" color="#F9A70B" mb={4}>CarePill</Text>
+              <Text style={clickitStyle} fontSize="xl" fontWeight="bold" color="black" mb={4}>Clickit</Text>
 
               <form>
                   <FormControl id="userName">
                       <Avatar size="xl" src="https://bit.ly/sage-adebayo"></Avatar>
                   </FormControl>
 
-                  <FormControl id="name" isRequired color="#F9A70B">
+                  <FormControl id="name" isRequired color="black">
                       <FormLabel>Name</FormLabel>
                       <Input
                           placeholder="Enter Your Name"
                           _placeholder={{ color: 'gray.500' }}
                           type="text"
                           value={name}
-                          color="white"
+                          color="black"
                           onChange={(e) => setName(e.target.value)}
                            
                       />
                   </FormControl>
 
-                  <FormControl id="email" isRequired color="#F9A70B">
+                  <FormControl id="email" isRequired color="black">
                       <FormLabel marginTop={2}>Email address</FormLabel>
                       <Input
                           placeholder="your-email@example.com"
                           _placeholder={{ color: 'gray.500' }}
                           type="email"
                           value={email}
-                          color="white"
+                          color="black"
                           onChange={(e) => setEmail(e.target.value)}
                          
                       />
                   </FormControl>
 
-                  <FormControl id="password" isRequired color="#F9A70B">
+                  <FormControl id="password" isRequired color="black">
                       <FormLabel marginTop={2}>Password</FormLabel>
                       <Input
                           placeholder="password"
                           _placeholder={{ color: 'gray.500' }}
                           type="password"
                           value={password}
-                          color="white"
+                          color="black"
                           onChange={(e) => setPassword(e.target.value)}
                           
                       />
@@ -154,7 +154,7 @@ export default function SignUp() {
                   </Stack>
               </form>
 
-              <Text mt={4} textAlign="center" fontSize="sm" color="#F9A70B">Already have an account?
+              <Text mt={4} textAlign="center" fontSize="sm" color="black">Already have an account?
                   <Link as={RouterLink} to="/login" color="blue.500" marginLeft={2}>
                       Log in
                   </Link>
