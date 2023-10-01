@@ -1,8 +1,31 @@
-import { Box, Image, Text, Badge, Flex, Stack } from '@chakra-ui/react';
-
+import React from 'react';
+import { Box, Image, Text, Badge, Flex, Button } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AddToCart } from '../Redux/Cart/action';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 const ProductCard = ({ product }) => {
   const { brand, gender, id, image, name, price, rating } = product;
+  const dispatch = useDispatch()
+  let userId = localStorage.getItem("userid");
+  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+  const Navigate = useNavigate()
 
+  const handleAddToCart = () => {
+
+
+    if (isAuth) {
+      axios.get(`https://6517e61b582f58d62d353538.mockapi.io/users/${userId}`).then((res) => {
+      
+     let data =[...res.data.cart,product]
+        dispatch(AddToCart(userId,data));
+      })
+    }
+    else {
+      Navigate("/login")
+    }
+
+  }
   return (
     <Box
       borderWidth="1px"
@@ -32,6 +55,10 @@ const ProductCard = ({ product }) => {
           <Badge colorScheme="green">{rating} ★</Badge>
         </Box>
       </Flex>
+
+      <Button colorScheme="teal" mt="4" onClick={handleAddToCart}>
+        Add to Cart
+      </Button>
     </Box>
   );
 };
