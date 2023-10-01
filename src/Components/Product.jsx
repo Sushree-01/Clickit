@@ -37,7 +37,7 @@ export const Product = () => {
     <Box p={4}>
       <Grid templateColumns="repeat(4, 1fr)" gap={2}>
         {product.length > 0 ? (
-          product.map((product) => (
+          product?.map((product) => (
             <GridItem key={product.id}>
               <ProductCard product={product} />
             </GridItem>

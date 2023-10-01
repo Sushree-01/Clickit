@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -49,7 +49,7 @@ export const Navbar = () => {
     transform: scrolling ? 'translateY(-100%)' : 'translateY(0)',
     transition: 'transform 0.3s ease-in-out',
   };
-
+const Navigate=useNavigate()
   return (
       <Flex
   as="nav"
@@ -73,7 +73,7 @@ export const Navbar = () => {
         <Link href="/product" _hover={{ color: 'teal.500' }} marginX="2">
           New Arrivals
         </Link>
-        <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">
+        <Link href="/cart" _hover={{ color: 'teal.500' }} marginX="2" >
           Cart
         </Link>
         <Link href="#" _hover={{ color: 'teal.500' }} marginX="2">
@@ -95,11 +95,12 @@ export const Navbar = () => {
       <Input type="text" placeholder="Search" marginRight="2" />
     </InputGroup>
   </Box>
-  <Button
+  
+  <Button onClick={()=>Navigate("/login")}
     marginRight={'50px'}
     _hover={{ transform: 'scale(1.1)', color: 'teal.500' }}
     display={{ base: 'none', md: 'block' }}
-    onClick={onClose}
+    // onClick={onClose}
   >
     Login
   </Button>
