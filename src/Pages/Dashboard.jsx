@@ -10,14 +10,16 @@ import {
   TabPanels,
   TabPanel,
   Grid,
-  Link,Container
-
+  Link,
+  Container,
+  useBreakpointValue
 } from "@chakra-ui/react";
 import { useState,useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styled from 'styled-components';
 import axios from 'axios';
+import { motion, isValidMotionProp } from 'framer-motion'
 export const Dashboard = () => {
   const images=["https://m.media-amazon.com/images/G/31/img21/MA2023/AW23/AF/AW_2023_Desktop_Men._SX3000_QL85_FMpng_.png",
   "https://m.media-amazon.com/images/G/31/img21/MA2023/BOTW23/27thsept/Men_2_3000x900_1695858530844_0._CB577170120_.png"
@@ -63,12 +65,14 @@ const bloginfo = [
     desc: "A nostalgic journey back to the fashion trends that defined the '80s era."
   }
 ];
-
+const carousaal=[""]
 const [currentIndex, setCurrentIndex] = useState(0);
 const [cardsData,setcarddata]=useState([])
 const [activeCategory, setActiveCategory] = useState("male");
 const[filtereddata,setfiltereddata]=useState([])
-
+const [currentProductIndex, setCurrentProductIndex] = useState(Math.floor(Math.random() * 51));
+const fontSize = useBreakpointValue({ base: "10px", md: "md", lg: "lg" });
+const imageSize = useBreakpointValue({ base: "100%", md: "80%", lg: "60%" });
 useEffect(() => {
   axios.get(`https://65151b4adc3282a6a3cddbd1.mockapi.io/products`)
   .then((res)=>{
@@ -80,10 +84,13 @@ useEffect(() => {
   ])
   const interval = setInterval(() => {
     goToNextSlide();
-  }, 2000);
+    setCurrentProductIndex(Math.floor(Math.random() * 50)
+  );
+  }, 5000);
 
   return () => {
     clearInterval(interval);
+    
   };
 }, [activeCategory]);
 const goToNextSlide = () => {
@@ -184,6 +191,21 @@ const [currentPage1, setCurrentPage1] = useState(0);
   return (
     <>
     <script src="https://kit.fontawesome.com/6374a7542c.js" crossorigin="anonymous"></script>
+    <CARTICON>
+    <Box
+      position="fixed"       
+      right="0"     
+      transform="translateY(-50%)" 
+      zIndex="9999" 
+      display={'flex'}
+      justifyContent={'end'}
+      cursor={'pointer'}   
+    >
+      
+      <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 576 512"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>
+      
+    </Box>
+    </CARTICON>
       <Box position="relative" overflow="hidden" onTouchMove={handleSwipe} mt={"20px"}>
       <Carousel
        selectedItem={currentIndex}
@@ -257,12 +279,85 @@ const [currentPage1, setCurrentPage1] = useState(0);
           <p className="image-text">Or For Family?</p>
         </div>
       </div>
-</DIV10>
-      
+</DIV10> 
     </DIV>
+   {cardsData.length>0?<DIVFADE>
+      <div><Text fontSize={"xl"} mb={'20px'} color={'green.400'}  fontWeight={'bold'}>Top Picks For You</Text>
+       <Box
+      borderWidth="1px"
+      borderRadius="md"
+      p="2"
+      boxShadow="md"
+      mb="4"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      width="70%"
+      margin="auto"
+      fontSize={fontSize}
+      cursor={"pointer"}
+    >
+      <Image
+        src={cardsData[currentProductIndex].image}
+        alt={cardsData[currentProductIndex].name}
+        style={{ width: imageSize, alignSelf: 'center', height: 'auto' }}
+        
+      />
+      <Text className='name' fontWeight="bold" mt="2">
+        {cardsData[currentProductIndex].name}
+      </Text>
+      <Text color="gray.600" className='brand'>
+        {cardsData[currentProductIndex].brand}
+      </Text>
+      <Text display="flex" textAlign="center" className='rating'>
+      <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"/></svg>
+        {cardsData[currentProductIndex].rating}
+      </Text>
+      <Text color="teal.500" mt="2" display="flex" className='price'>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>
+        {cardsData[currentProductIndex].price}
+      </Text>
+    </Box></div>
+    <div><Text fontSize={"xl"} mb={'20px'} color={'green.400'}  fontWeight={'bold'}>Just Arrived</Text>
+       <Box
+      borderWidth="1px"
+      borderRadius="md"
+      p="2"
+      boxShadow="md"
+      mb="4"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      width="70%"
+      margin="auto"
+      fontSize={fontSize}
+      cursor={"pointer"}
+    >
+      <Image
+        src={cardsData[currentProductIndex+2].image}
+        alt={cardsData[currentProductIndex+2].name}
+        style={{ width: imageSize, alignSelf: 'center', height: 'auto' }}
+        
+      />
+      <Text className='name' fontWeight="bold" mt="2">
+        {cardsData[currentProductIndex+2].name}
+      </Text>
+      <Text color="gray.600" className='brand'>
+        {cardsData[currentProductIndex+2].brand}
+      </Text>
+      <Text display="flex" textAlign="center" className='rating'>
+      <svg  xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><path d="M287.9 0c9.2 0 17.6 5.2 21.6 13.5l68.6 141.3 153.2 22.6c9 1.3 16.5 7.6 19.3 16.3s.5 18.1-5.9 24.5L433.6 328.4l26.2 155.6c1.5 9-2.2 18.1-9.6 23.5s-17.3 6-25.3 1.7l-137-73.2L151 509.1c-8.1 4.3-17.9 3.7-25.3-1.7s-11.2-14.5-9.7-23.5l26.2-155.6L31.1 218.2c-6.5-6.4-8.7-15.9-5.9-24.5s10.3-14.9 19.3-16.3l153.2-22.6L266.3 13.5C270.4 5.2 278.7 0 287.9 0zm0 79L235.4 187.2c-3.5 7.1-10.2 12.1-18.1 13.3L99 217.9 184.9 303c5.5 5.5 8.1 13.3 6.8 21L171.4 443.7l105.2-56.2c7.1-3.8 15.6-3.8 22.6 0l105.2 56.2L384.2 324.1c-1.3-7.7 1.2-15.5 6.8-21l85.9-85.1L358.6 200.5c-7.8-1.2-14.6-6.1-18.1-13.3L287.9 79z"/></svg>
+        {cardsData[currentProductIndex+2].rating}
+      </Text>
+      <Text color="teal.500" mt="2" display="flex" className='price'>
+      <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>
+        {cardsData[currentProductIndex+2].price}
+      </Text>
+    </Box></div>
+     </DIVFADE>:""}
     <Box textAlign="center" padding="2rem">
   <Text
-    fontSize={{ base: "4xl", md: "5xl", lg: "6xl" }}
+    fontSize={{ base: "2xl", md: "3xl", lg: "5xl" }}
     fontWeight="bold"
     color="green.500"
   >
@@ -406,6 +501,9 @@ const [currentPage1, setCurrentPage1] = useState(0);
     </div>
   </div>
   </DIV5>
+  <Box m={"20px"} mt={"30px"}> 
+      <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/MA2023/PD23/sbcheader/Ethnic-Auto_Hero_Scroll-_PC.gif" alt='banner'/>
+  </Box>
   <DIV6>
   <Box textAlign="center" padding="2rem">
   <Text
@@ -739,19 +837,6 @@ const Image = styled.img`
   &:hover {
     transform: scale(1.1);
   }
-`;
-const H1=styled.h1`
-font-size: 50px;
-background-color: tomato;
-@media screen and (min-width: 767px) and (max-width: 1023px)  {
-  font-size: 20px;
-}
-@media screen and (min-width: 401px) and (max-width: 766px)  {
-  font-size: 15px;
-}
-@media screen and  (max-width: 400px)  {
-  font-size: 10px;
-}
 `
 const CARDDIV=styled.div`
 .card {
@@ -1044,15 +1129,6 @@ const DIV7=styled.div`
   font-size: 20%;
 }
 
-/* .prev-button:hover,
-.next-button:hover {
-  background-color: #ffffff;
-  color: #000000;
-}
-.prev-button{
-  bottom: 300px;
-  background-color: #ffffff;
-} */
 @media screen and (min-width: 768px) and (max-width: 1023px) {
   .blog-container {
   display: flex;
@@ -1103,23 +1179,44 @@ const DIVIMG=styled.div`
 
 `
 const DIV10=styled.div`
+margin-bottom: 50px;
   .image-container {
-  text-align: center;
+   text-align: center;
 }
-
 .image-wrap {
   display: inline-block;
-  border: 2px solid #3498db; /* Border styles */ /* Initial border radius for a circular shape */
-  overflow: hidden; /* Hide overflow content when rotated */
-  transition: border-radius 0.3s ease-in-out; /* Smooth transition for border radius */
+  border: 2px solid #3498db;
+  overflow: hidden;
+  transition: border-radius 0.3s ease-in-out;
 }
 
 .responsive-image {
   width: 226px;
-  height: 226px; /* Set your desired width and height */
+  height: 226px;
 }
-
 .image-text {
   text-align: center;
 }
+@media screen and (max-width: 767px) {
+  .image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+}
+`
+const DIVFADE=styled.div`
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+  margin: auto;
+  @media screen and (max-width: 500px) {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+`
+
+const CARTICON=styled.div`
+  
 `
