@@ -48,7 +48,6 @@ export default function SignUp() {
                       }).then(
                           message => {
                               if (message === "OK") {
-                                  alert("OTP sent to your email " + emailKey);
                                   Navigate("/verifyOTP", { state: { otp_val, email, name, password } })
                               }
                           }
