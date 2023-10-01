@@ -218,7 +218,7 @@ export const Navbar = () => {
 
       <RouterLink to="/login"> {/* Use RouterLink to navigate to the Login page */}
         <Button
-          marginRight={'50px'}
+          marginRight={'10px'}
           _hover={{ transform: 'scale(1.1)', color: 'teal.500' }}
           display={{ base: 'none', md: 'block' }}
           onClick={onClose}
@@ -227,6 +227,16 @@ export const Navbar = () => {
         </Button>
       </RouterLink>
 
+      <RouterLink to="/signup"> {/* Use RouterLink to navigate to the Login page */}
+        <Button
+          marginRight={'50px'}
+          _hover={{ transform: 'scale(1.1)', color: 'teal.500' }}
+          display={{ base: 'none', md: 'block' }}
+          onClick={onClose}
+        >
+          Signup
+        </Button>
+      </RouterLink>
       {!isLargerThanTablet && (
         <IconButton
           icon={<HamburgerIcon />}
