@@ -1,7 +1,10 @@
-import { Box, Image, Text, Badge, Flex, Stack } from '@chakra-ui/react';
+import React from 'react';
+import { Box, Image, Text, Badge, Flex, Button } from '@chakra-ui/react';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product}) => {
   const { brand, gender, id, image, name, price, rating } = product;
+
+ 
 
   return (
     <Box
@@ -32,6 +35,10 @@ const ProductCard = ({ product }) => {
           <Badge colorScheme="green">{rating} ★</Badge>
         </Box>
       </Flex>
+
+      <Button colorScheme="teal" mt="4" >
+        Add to Cart
+      </Button>
     </Box>
   );
 };
