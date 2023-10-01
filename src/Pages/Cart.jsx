@@ -1,44 +1,65 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import store from "../Redux/store";
 import { useEffect } from "react";
 import { getcartData } from "../Redux/Cart/action";
-
-
+import { Box, Image, Text, Badge, Flex} from '@chakra-ui/react';
 const Cart = () => {
-  const { userid } = useParams();
-  const cart = useSelector((store) => store.cartItemReducer.cart)
-  const dispatch = useDispatch();
+  let userid = localStorage.getItem("userid");
+  const cartData = useSelector((store) => store.cardReducer.cart);
+  const dispatch = useDispatch()
   const gridContainerStyle = {
     display: "grid",
     gridTemplateColumns: "repeat(3, 1fr)",
     gap: "16px",
-    width: "90%",
+    width: "70%",
     margin: "auto"
   };
 
   useEffect(() => {
-    dispatch((getcartData(userid)));
-  })
-  // const handleIncreaseQuantity = (item) => {
-  //   const updatedQuantity = item.quantity + 1;
-  //   dispatch(updateCartItemQuantityAction(item.id, updatedQuantity));
-  // };
-
-  // const handleDecreaseQuantity = (item) => {
-  //   if (item.quantity > 1) {
-  //     const updatedQuantity = item.quantity - 1;
-  //     dispatch(updateCartItemQuantityAction(item.id, updatedQuantity));
-  //   } else {
-  //     dispatch(removeFromCartAction(item.id));
-  //   }
-  // };
-
-
+    dispatch(getcartData(userid))
+  }, [])
   return (
-    <div style={gridContainerStyle}>
-      <h1>Cart </h1>
+    <div >
+      <h2>Your Cart</h2>
+      {cartData.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <div style={gridContainerStyle}>
+          {cartData.map((el) => (
+            <Box
+            key={el.id }
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+            p="4"
+            boxShadow="md"
+            maxW="300px"
+          >
+            <Image src={el.image} alt={el.name} maxH="200px" objectFit="cover" />
+      
+            <Box mt="2">
+              <Text fontWeight="semibold" fontSize="lg" lineHeight="tight" isTruncated>
+                {el.name}
+              </Text>
+              <Text color="gray.500">{el.brand}</Text>
+              <Text color="gray.700" fontSize="xl" mt="2">
+                ${el.price}
+              </Text>
+            </Box>
+      
+            <Flex justify="space-between" mt="4">
+              <Box>
+                <Badge colorScheme="blue">{el.gender}</Badge>
+              </Box>
+              <Box>
+                <Badge colorScheme="green">{el.rating} ★</Badge>
+              </Box>
+            </Flex>
+          </Box>
+          ))}
+        </div>
+      )}
     </div>
-  )
+  );
 }
 export { Cart }
-
