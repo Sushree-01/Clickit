@@ -1,3 +1,4 @@
+import { type } from '@testing-library/user-event/dist/type'
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -20,8 +21,10 @@ export const SideBar = () => {
       brand,
       gender,
       rate,
+      
     };
     order && (params.order = order);
+    
     setSearchparams(params);
   }, [brand, gender, order, rate]);
 
@@ -66,46 +69,87 @@ export const SideBar = () => {
 setOrder(value)
     }
     return (
-        <div>
-            <div>
+        <div style={{border:'1px solid white', marginTop:'10px',textAlign:'justify',padding:'50px',justifyContent:'center'}}>
+            <div >
                 <h4>Filter By Brand</h4>
+                <br />
                 <input type="checkbox" name='Pantaloons Junior' value={"Pantaloons Junior"}
                     onChange={handleBrand} defaultChecked={brand.includes("Pantaloons Junior")} />
-                <label>Pantaloons Junior</label>
+                   
+                <label style={{marginLeft:'5px'}}>Pantaloons Junior</label>
+                <br />
                 <input type="checkbox" name='HERE&NOW' value={"HERE&NOW"} onChange={handleBrand} defaultChecked={brand.includes("HERE&NOW")} />
-                <label>HERE&NOW</label>
+                
+                <label style={{marginLeft:'5px'}}>HERE&NOW</label>
+                <br />
                 <input type="checkbox" name='A.T.U.N.' value={"A.T.U.N."} onChange={handleBrand} defaultChecked={brand.includes("A.T.U.N.")} />
-                <label>A.T.U.N.</label>
+                <label style={{marginLeft:'5px'}}>A.T.U.N.</label>
+
+                <br />
+                <input type="checkbox" name='taffykids.' value={"taffykids."} onChange={handleBrand} defaultChecked={brand.includes("taffykids.")} />
+                <label style={{marginLeft:'5px'}}>taffykids</label>
+
+                <br />
+                <input type="checkbox" name='CrayonFlakes' value={"CrayonFlakes"} onChange={handleBrand} defaultChecked={brand.includes("CrayonFlakes")} />
+                <label style={{marginLeft:'5px'}}>CrayonFlakes</label>
+
+                
+                <br />
+                <input type="checkbox" name='Pantaloons Junior' value={"Pantaloons Junior"} onChange={handleBrand} defaultChecked={brand.includes("Pantaloons Junior")} />
+                <label style={{marginLeft:'5px'}}>Pantaloons Junior</label>
+
+                
+                <br />
+                <input type="checkbox" name='CAVIO' value={"CAVIO"} onChange={handleBrand} defaultChecked={brand.includes("CAVIO")} />
+                <label style={{marginLeft:'5px'}}>CAVIO</label>
+
+                <br />
+                <input type="checkbox" name='Roadster' value={"Roadster"} onChange={handleBrand} defaultChecked={brand.includes("Roadster")} />
+                <label style={{marginLeft:'5px'}}>Roadster</label>
+               
+                <br />
+                <input type="checkbox" name='Urbano Fashion' value={"Urbano Fashion"} onChange={handleBrand} defaultChecked={brand.includes("Urbano Fashion")} />
+                <label style={{marginLeft:'5px'}}>Urbano Fashion</label>
             </div>
             <br />
             <div>
                 <h4>Filter By Gender</h4>
+                <br />
                 <input type="checkbox" name="male" value="male" defaultChecked={gender.includes("male")} onChange={handleGender} />
-                <label>Men👨‍🔬</label>
+                <label style={{marginLeft:'5px'}}>Men👨‍🔬</label>
+                <br />
                 <input type="checkbox" name="female" value="female" defaultChecked={gender.includes("female")} onChange={handleGender} />
-                <label>Women👩‍⚕️</label>
+                <label style={{marginLeft:'5px'}}>Women👩‍⚕️</label>
+                <br />
                 <input type="checkbox" name="kids" value="kids" defaultChecked={gender.includes("kids")} onChange={handleGender} />
-                <label>Kid👶</label>
+                <label style={{marginLeft:'5px'}}>Kid👶</label>
             </div>
             <br />
             <br />
             <div>
                 <h4>Sort By Price</h4>
+                <br />
                 <div onChange={handleSort}>
                 <input type="radio" name="order" value={"asc"}  />
-                <label>ASC</label>
+                <label style={{marginLeft:'5px'}}>ASC</label>
+                <br />
                 <input type="radio" name="order" value={"desc"}/>
-                <label>DESC</label>
+                <label style={{marginLeft:'5px'}}>DESC</label>
+                
                 </div>
             </div>
+            <br />
             <div className="fltrating" style={{ display: rate }}>
                 <h4>Filter By Rating</h4>
+                <br />
                 <p>
             <label htmlFor="">Rating⭐</label>
             <input
               type="checkbox"
               onChange={handleRating}
               value={"1.1"}
+              name='rate'
+              checked={rate.includes("1.1")}
               style={{ position: "relative", right: " -8px" }}
             />
           </p>
@@ -123,7 +167,8 @@ setOrder(value)
             <input
               type="checkbox"
               onChange={handleRating}
-              value={"3.3"}
+              value={3}
+              checked={rate.includes(3)}
               style={{ position: "relative", right: " -8px" }}
             />
           </p>
@@ -131,7 +176,8 @@ setOrder(value)
          
           <p>
             <label htmlFor="">Rating⭐⭐⭐⭐</label>
-            <input onChange={handleRating} type="checkbox" value={"4.2"} />
+            <input onChange={handleRating} type="checkbox" value={"4"}
+            defaultChecked={rate.includes('4')} />
           </p>
         </div>
 
