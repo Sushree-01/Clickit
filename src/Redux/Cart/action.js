@@ -1,4 +1,4 @@
-import {GET_CART_DATA } from "./actionType";
+import { ADD_TO_CART, GET_CART_DATA, REMOVE_FROM_CART } from "./actionType";
 import axios from "axios";
 
 export const getcartData = (userid) => (dispatch) => {
@@ -7,4 +7,21 @@ export const getcartData = (userid) => (dispatch) => {
             console.log(res.data.cart);
             dispatch({ type: GET_CART_DATA, payload: res.data.cart })
         })
+}
+
+export const removeFromCart = (userid, newCart) => (dispatch) => {
+    dispatch({ type: REMOVE_FROM_CART, payload: newCart })
+    axios.put(`https://6517e61b582f58d62d353538.mockapi.io/users/${userid}`, {
+        cart: newCart
+    })
+        // .then((res) => {
+        //     dispatch({ type: GET_CART_DATA, payload: res.data.cart })
+        // })
+}
+
+export const AddTOCart = (userid,newData)=>(dispatch)=>{
+    dispatch({type:ADD_TO_CART, payload:newData})
+    axios.put(`https://6517e61b582f58d62d353538.mockapi.io/users/${userid}`,{
+        cart:newData
+    })
 }
