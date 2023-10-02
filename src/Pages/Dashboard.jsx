@@ -22,6 +22,8 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import { AddToCart } from '../Redux/Cart/action';
+import { useDispatch } from 'react-redux';
 export const Dashboard = () => {
   const Navigate=useNavigate()
   const images=["https://m.media-amazon.com/images/G/31/img21/MA2023/AW23/AF/AW_2023_Desktop_Men._SX3000_QL85_FMpng_.png",
@@ -81,6 +83,7 @@ const [currentProductIndex2, setCurrentProductIndex2] = useState(5);
 const fontSize = useBreakpointValue({ base: "10px", md: "md", lg: "lg" });
 const imageSize = useBreakpointValue({ base: "100%", md: "80%", lg: "60%" });
 const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+const dispatch = useDispatch()
 useEffect(() => {
   // axios.get(`https://65151b4adc3282a6a3cddbd1.mockapi.io/products`)
   // .then((res)=>{
@@ -139,6 +142,21 @@ const handlePrevPage = () => {
     setCurrentPage(currentPage - 1);
   }
 };
+const handleAddToCart = (card) => {
+ 
+
+  if (isAuth) {
+    axios.get(`https://6517e61b582f58d62d353538.mockapi.io/users/${card.id}`).then((res) => {
+    
+   let data =[...res.data.cart,card]
+      dispatch(AddToCart(card.id,data));
+    })
+  }
+  else {
+    Navigate("/login")
+  }
+
+}
 const renderCards = () => {
   const startIndex = currentPage * cardsPerPage;
   const endIndex = startIndex + cardsPerPage;
@@ -168,8 +186,7 @@ const renderCards = () => {
     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><path d="M0 64C0 46.3 14.3 32 32 32H96h16H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H231.8c9.6 14.4 16.7 30.6 20.7 48H288c17.7 0 32 14.3 32 32s-14.3 32-32 32H252.4c-13.2 58.3-61.9 103.2-122.2 110.9L274.6 422c14.4 10.3 17.7 30.3 7.4 44.6s-30.3 17.7-44.6 7.4L13.4 314C2.1 306-2.7 291.5 1.5 278.2S18.1 256 32 256h80c32.8 0 61-19.7 73.3-48H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H185.3C173 115.7 144.8 96 112 96H96 32C14.3 96 0 81.7 0 64z"/></svg>{card.price}
     </Text>
     <div className='buttons'>
-      <button className='buttonadd'>Add</button>
-      <button className='buttonbuy'>Buy</button>
+      <button className='buttonadd' onClick={()=>{handleAddToCart(card)}}>Add To Cart</button>
     </div>
   </Box>
      </CARDDIV>
@@ -205,10 +222,11 @@ const [currentPage1, setCurrentPage1] = useState(0);
       behavior: 'smooth',
     });
   }
+ 
   const currentData = bloginfo.slice(currentPage1, currentPage1 + blogsPerPage);
   return (
     <>
-    <script src="https://kit.fontawesome.com/6374a7542c.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/6374a7542c.js" crossOrigin="anonymous"></script>
     <CARTICON>
     {
         isAuth ? <Box
@@ -534,7 +552,8 @@ const [currentPage1, setCurrentPage1] = useState(0);
     </Carousel>
     </Box>
   <DIV5>
-  <div className="image-container">
+    <Box fontFamily={"monospace"}>
+    <div className="image-container">
     <div className="image-wrapper">
       <img src="https://xstore.8theme.com/demos/dark/wp-content/uploads/sites/5/2016/05/banner-man.jpg" alt="1" className="animated-image"/>
       <div  className="overlay">
@@ -554,6 +573,7 @@ const [currentPage1, setCurrentPage1] = useState(0);
       </div>
     </div>
   </div>
+    </Box>
   </DIV5>
   <Box m={"20px"} mt={"30px"}> 
       <img src="https://images-eu.ssl-images-amazon.com/images/G/31/img21/MA2023/PD23/sbcheader/Ethnic-Auto_Hero_Scroll-_PC.gif" alt='banner'/>
