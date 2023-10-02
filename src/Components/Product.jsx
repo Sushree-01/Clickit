@@ -17,7 +17,7 @@ export const Product = () => {
   useEffect(() => {
     const obj = {
       params: {
-        search:search,
+        q:search,
         brand: searchParams.getAll('brand'),
         gender: searchParams.getAll('gender'),
         rate: searchParams.getAll('rate'),
