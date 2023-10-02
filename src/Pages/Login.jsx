@@ -21,7 +21,7 @@ const Login = () => {
             const response = await fetch(`https://6517e61b582f58d62d353538.mockapi.io/users?email=${email}`);
             const data = await response.json();
             if (data[0].password === password) {
-                localStorage.setItem("userid", data[0].userID);
+                localStorage.setItem("userid", data[0].userID);    
                 localStorage.setItem("isAuth", true);
                 dispatch({ type: LOGIN_SUCCESS });
                 toast({

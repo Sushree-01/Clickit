@@ -34,6 +34,7 @@ export const Navbar = () => {
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   // const initialSearch = searchparams.get('search');
+  const Navigate = useNavigate()
 
   const [search, setsearch] = useState("")
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ export const Navbar = () => {
     transform: scrolling ? 'translateY(-100%)' : 'translateY(0)',
     transition: 'transform 0.3s ease-in-out',
   };
-  const Navigate = useNavigate()
+ 
 
   return (
     <Flex
@@ -118,6 +119,7 @@ export const Navbar = () => {
           Logout
         </Button> : <Button
           marginRight={'50px'}
+          onClick={() => Navigate("/login")}
           _hover={{ transform: 'scale(1.1)', color: 'teal.500' }}
           display={{ base: 'none', md: 'block' }}
         >
@@ -179,7 +181,7 @@ export const Navbar = () => {
                   {isAuth ? <Link href="#" _hover={{ color: 'teal.500' }} onClick={handleLogout}>
                     LogOut
                   </Link> :
-                    <Link href="#" _hover={{ color: 'teal.500' }}>
+                    <Link href="#" _hover={{ color: 'teal.500' }} onClick={() => Navigate("/login")}>
                       LogIn
                     </Link>}
 
