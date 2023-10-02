@@ -67,6 +67,9 @@ const bloginfo = [
     desc: "A nostalgic journey back to the fashion trends that defined the '80s era."
   }
 ];
+const images3=["https://m.media-amazon.com/images/G/31/img21/MA2023/EOSS/PC_PO-4PC._CB603300969_.gif"
+,"https://m.media-amazon.com/images/G/31/Symbol/2023/Shirts__polos_PC._CB598719434_.png",
+"https://m.media-amazon.com/images/G/31/Symbol/2023/WRS_June/Cat_Pages/Men/3_new._CB587534106_.png"]
 const data=[{"id":1,"rating":4.5,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/23811198/2023/6/29/aa6f6470-5f77-49b0-aa05-1f74b5f0e0e11688046247683PantaloonsJuniorBoysMaroonOpaqueCasualShirt1.jpg","brand":"Pantaloons Junior","name":"Boys Band Collar Cotton Shirt","price":599,"gender":"kids"},{"id":2,"rating":5,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24387794/2023/8/7/c5f1c2ff-f2db-461e-9647-98a7a5cf4e591691421901089PantaloonsBoysBlackOpaquePrintedCasualShirt1.jpg","brand":"Pantaloons","name":"Boys Cotton Casual Shirt","price":700,"gender":"kids"},{"id":3,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/14672762/2021/8/16/b58769a6-6a39-45a8-b64a-80808e2a115b1629097397254-HERENOW-Boys-Navy-Blue-Solid-Cotton-Casual-Shirt-77016290973-1.jpg","brand":"HERE&NOW","name":"Boys Solid Cotton Casual Shirt","price":700,"gender":"kids"},{"id":4,"rating":3.4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24710810/2023/8/29/ca751801-65e5-4bde-bcd4-628d2de34d331693292756998taffykidsBoysBlueOpaquePrintedCasualShirt1.jpg","brand":"taffykids","name":"Boys Cotton Casual Shirt","price":799,"gender":"kids"},{"id":5,"rating":3.7,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/19662806/2022/8/25/c76e1cfa-1bff-486a-aa55-fdae796cd70f1661432199225ATUNBoysShirt1.jpg","brand":"A.T.U.N.","name":"Floral Printed Casual Shirt","price":700,"gender":"kids"},{"id":6,"rating":700,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24387808/2023/8/7/4be90b43-180c-4565-bb70-aecfa680762b1691421915835PantaloonsBoysBlueOpaquePrintedCasualShirt1.jpg","brand":"Pantaloons","name":"Boys Cotton Casual Shirt","price":700,"gender":"kids"},{"id":7,"rating":4.5,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/23811200/2023/6/29/2bf0b26d-aafd-4cdf-b723-8aa439dc107a1688046247084PantaloonsJuniorBoysOliveGreenOpaqueCasualShirt1.jpg","brand":"Pantaloons Junior","name":"Boys Band Collar Cotton Shirt","price":599,"gender":"kids"},{"id":8,"rating":3.9,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/23218482/2023/5/16/7dd2a3b7-b19d-43ca-b908-f866b0daab741684238991659CrayonFlakesBoysOffWhiteFloralOpaquePrintedCasualShirt1.jpg","brand":"CrayonFlakes","name":"Boys Floral Printed Shirt","price":700,"gender":"kids"},{"id":9,"rating":4.7,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24655900/2023/8/26/c78a00fd-aad0-400e-a0f9-10bbe994e5261693015559072PantaloonsJuniorBoysMaroonOpaquePrintedCasualShirt1.jpg","brand":"Pantaloons Junior","name":"Boys Cotton Casual Shirt","price":599,"gender":"kids"},{"id":10,"rating":4.3,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/21947748/2023/2/12/4dfa4844-5874-40c8-bd83-0bf4b092f2cc1676141209114CrayonFlakesBoysGreyFloralPrintedCasualShirt1.jpg","brand":"CrayonFlakes","name":"Boys Cotton Casual Shirt","price":700,"gender":"kids"},{"id":11,"rating":700,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24387840/2023/8/7/a6aff27c-8ad3-4a06-be1c-e354882b59cb1691420056909PantaloonsBoysBlueOpaquePrintedCasualShirt1.jpg","brand":"Pantaloons","name":"Boys Printed Pure Cotton Shirt","price":700,"gender":"kids"},{"id":12,"rating":4.3,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/19662810/2022/8/25/62f4ec2a-cdf3-4cdc-a35c-3144b02d736d1661432266938ATUNBoysShirt1.jpg","brand":"A.T.U.N.","name":"Boys Casual Shirt","price":700,"gender":"kids"},{"id":13,"rating":700,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24695528/2023/8/28/14972277-f774-4837-b1f0-2051fbc2bc911693231592426CAVIOBoysBlackComfortOpaqueCasualShirt1.jpg","brand":"CAVIO","name":"Boys Cotton Shacket & T-Shirt","price":700,"gender":"kids"},{"id":14,"rating":700,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24695528/2023/8/28/14972277-f774-4837-b1f0-2051fbc2bc911693231592426CAVIOBoysBlackComfortOpaqueCasualShirt1.jpg","brand":"CAVIO","name":"Boys Cotton Shacket & T-Shirt","price":700,"gender":"kids"},{"id":15,"rating":700,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24695528/2023/8/28/14972277-f774-4837-b1f0-2051fbc2bc911693231592426CAVIOBoysBlackComfortOpaqueCasualShirt1.jpg","brand":"CAVIO","name":"Boys Cotton Shacket & T-Shirt","price":700,"gender":"kids"},{"id":16,"name":"India Cricket ODI Fan Jersey","rating":4.5,"brand":"ADIDAS","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/23833538/2023/8/11/5542aadc-da2c-4007-bdbe-0b3b3a84928e1691729586790-ADIDAS-Men-Tshirts-1791691729586332-1.jpg","price":423,"gender":"male"},{"id":17,"name":"Slim Tropical Printed Pure Cotton T-shirt","rating":4,"brand":"Urbano Fashion","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/12377258/2020/9/11/ce1b7bcb-a65a-4eb0-a317-42ac02718f1e1599798741705UrbanoFashionPrintedMenRoundNeckDarkGreenT-Shirt1.jpg","price":340,"gender":"male"},{"id":18,"name":"Printed Pure Cotton T-shirt","rating":4.2,"brand":"HRX by Hrithik Roshan","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/1700871/2020/1/22/f932ae44-0fb8-4b92-b7bc-f1756253294b1579692118186-HRX-by-Hrithik-Roshan-Men-Teal-Blue-Printed-T-shirt-90515796-1.jpg","price":314,"gender":"male"},{"id":19,"name":"Men Cotton Pure Cotton T-shirt","rating":4.2,"brand":"Roadster","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/1996777/2022/11/22/336445a8-fa32-4396-914a-2629b49465d31669112704759RoadsterMenBlackCottonPureCottonT-shirt1.jpg","price":279,"gender":"male"},{"id":20,"name":"Printed Pure Cotton T-Shirt","rating":4.4,"brand":"THE HOLLANDER","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24476078/2023/8/12/4b24938d-bcfb-4c55-bdbb-1e4dea3233541691849292482THEHOLLANDERMenLavenderCheckedDrop-ShoulderSleevesAppliqueT-1.jpg","price":499,"gender":"male"},{"id":21,"name":"Knitted Polo Collar T-shirt","rating":4.5,"brand":"Louis Philippe Sport","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/21474618/2023/2/6/3fc0ad84-eb64-49db-8810-8b0085bc3d9f1675661229788-Louis-Philippe-Sport-Men-Tshirts-2481675661229099-1.jpg","price":343,"gender":"male"},{"id":22,"name":"Round Neck Lounge Tshirts","rating":4.4,"brand":"max","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/22809172/2023/4/18/29fe0927-cb6b-460e-a584-d2c265563ffc1681810840196MenSolidCrewNeckRegularFitLoungeT-shirt1.jpg","price":239,"gender":"male"},{"id":23,"name":"Printed Cotton T-Shirt","rating":4.1,"brand":"Powerlook","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/23603528/2023/6/12/f37986d3-42be-48f8-bf7b-f4e6a985e3c41686568609848PowerlookMenWhitePrintedMandarinCollarPocketsT-shirt1.jpg","price":274,"gender":"male"},{"id":24,"name":"Solid Round Neck T-shirt","rating":4,"brand":"Roadster","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/9901805/2019/7/16/8139e933-b2a1-4d35-8a9f-d01cf3e1ace81563256634726-Roadster-Men-Tshirts-5541563256633223-1.jpg","price":469,"gender":"male"},{"id":25,"rating":4.4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17786152/2022/7/2/b137cf3d-6243-41bb-8a20-82cfcc4032e21656746823524BitiyabyBhamagirlBlackEmbroideredFlutterSleevesMaxiDress7.jpg","brand":"Bitiya by Bhama","name":"girl Embroidered Maxi Dress","price":919,"gender":"girl"},{"id":26,"rating":3.9,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/21574848/2023/1/16/be1ed213-266f-48bc-a6f9-a4e65557f8151673888685137ATUNCream-ColouredDress1.jpg","brand":"A.T.U.N.","name":"Dress","price":699,"gender":"girl"},{"id":27,"rating":4.3,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17775244/2022/4/6/efb7e9b0-470b-4bb5-99a7-8186f4a122ea1649224516381pspeachesYellowFloralMidiDress1.jpg","brand":"pspeaches","name":"girl Midi Dress With Shrug","price":800,"gender":"girl"},{"id":28,"rating":4.4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24381592/2023/8/7/844ffc97-beb2-49a7-ac8e-0d31c082cb711691414421264taffykidsYellowPrintNetPeplumDress1.jpg","brand":"taffykids","name":"girl Embellished Dress","price":799,"gender":"girl"},{"id":29,"rating":4.4,"image":"https://images.meesho.com/images/products/277918274/gy56c_400.webp","brand":"Sangria","name":"girl Cotton Printed Dress","price":398,"gender":"girl"},{"id":30,"rating":3.8,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/22422926/2023/3/18/16465e2e-83c5-4f7c-87c9-86a8ffe2334b1679158696335Dresses1.jpg","brand":"FASHION DREAM","name":"Shirt Style Midi Dress","price":599,"gender":"girl"},{"id":31,"rating":4.4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/21817592/2023/2/2/0357204b-b308-4e5f-b151-3c13f86d30b41675349448232IW-PURPLESHIBORI1.jpg","brand":"pspeaches","name":"girl A-Line Midi Dress","price":964,"gender":"girl"},{"id":32,"rating":4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/18003400/2022/4/23/090191e5-9c59-4f1b-bfcd-d51cb4aa96d61650704469691BitiyabyBhamaOffWhiteFloralMaxiDress1.jpg","brand":"Bitiya by Bhama","name":"Floral Maxi Dress","price":827,"gender":"girl"},{"id":33,"rating":4.1,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17273786/2022/5/13/5e23e5a6-5e0f-4ba3-ac1e-79d5938fcfd81652447098732CUTECUMBERgirlBlueDenimSheathDress6.jpg","brand":"CUTECUMBER","name":"girl Denim Sheath Dress","price":1350,"gender":"girl"},{"id":34,"rating":4.5,"image":"https://images.meesho.com/images/products/191450279/bix9t_400.webp","brand":"Sangria","name":"girl Printed A-Line Dress","price":298,"gender":"girl"},{"id":35,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/21574840/2023/1/16/3076e98e-aaa5-4e36-acf7-8f73a76971581673888686565ATUNMulticolouredStripedKeyholeNeckDress1.jpg","brand":"A.T.U.N.","name":"Striped Keyhole Neck Dress","price":699,"gender":"girl"},{"id":36,"rating":4.3,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24528756/2023/8/17/34189c01-c194-424c-a8d7-0fc1631ef0321692278563595PantaloonsJuniorPinkA-LineDress1.jpg","brand":"Pantaloons Junior","name":"girl Embroidered A-Line Dress","price":799,"gender":"girl"},{"id":37,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/22422914/2023/3/18/b7f79728-be96-4810-9725-81b8fd8a5e141679158659001Dresses1.jpg","brand":"FASHION DREAM","name":"Georgette Fit & Flare Midi Flared Sleeve Dress","price":679,"gender":"girl"},{"id":38,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/19792526/2022/9/5/be858363-243c-4b54-8c66-e9ae32e499ef1662352460783POMYJINNYPinkDress1.jpg","brand":"POMY & JINNY","name":"Cotton  Dress","price":399,"gender":"girl"},{"id":39,"rating":4.4,"image":"https://images.meesho.com/images/products/167572823/a1vdw_400.webp","brand":"Sangria","name":"Girl Ethnic Motifs ALine Dress","price":329,"gender":"girl"},{"id":40,"rating":4.4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/20695836/2022/11/10/ba1724c2-c606-481c-a0ca-63424b61a8661668078028270WomensRayonPrintedEmbroideredKurtaWithPantAndDupatta1.jpg","brand":"SINGNI","name":"Women Embroidered Kurta Set","price":999,"gender":"female"},{"id":41,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/22120556/2023/2/25/986d6f97-fe9b-487a-9c64-f577e0a32c491677314970316KhushalKwomenEmbroideryKurtaandpalazzowithdupattaset7.jpg","brand":"Khushal K","name":"Kurta with Palazzos & Dupatta","price":1525,"gender":"female"},{"id":42,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24476720/2023/8/12/a4c2c7a1-0252-40da-952f-f3e5ab61d3b01691847823767KALINIWomenPurpleEthnicMotifsEmbroideredKurtawithTrouserDupa1.jpg","brand":"KALINI","name":"Embroidered Kurta Sets","price":850,"gender":"female"},{"id":43,"rating":4.3,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/16712782/2022/4/14/2afbbc41-329f-4850-8aee-00dccdf641851649922896889-Indo-Era-Solid-Wine-Straight-Kurta-Palazzo-With-Dupatta-Set--1.jpg","brand":"Indo Era","name":"Women Yoke Design Kurta with Palazzos With Dupatta","price":799,"gender":"female"},{"id":44,"rating":4.4,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24962840/2023/9/13/a9074516-a96b-4fb9-8adc-70d49ddf75921694600318355KurtaSets1.jpg","brand":"FASHOR","name":"Kurta & Trousers With Dupatta","price":2131,"gender":"female"},{"id":45,"rating":4.5,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/16707380/2022/2/3/de9d67d7-394c-422e-a016-d5bf5f2ec7491643888592182-Anouk-Women-Kurta-Sets-6761643888591217-1.jpg","brand":"Anouk","name":"Women Yoke Design Kurta with Palazzos With Dupatta","price":1375,"gender":"female"},{"id":46,"rating":4.1,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/21082388/2022/12/5/7f77e6a6-7198-4aa0-a2df-76c6f58850da1670251734080KurtaSets1.jpg","brand":"KALINI","name":"Striped Kurta Sets","price":639,"gender":"female"},{"id":47,"rating":4.5,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17487194/2022/3/21/2dd80782-75be-496b-8bac-2978541418161647846846121-Libas-Women-Kurta-Sets-7321647846845273-1.jpg","brand":"Libas","name":"Zari Woven Design Kurta Set","price":1799,"gender":"female"},{"id":48,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/17251470/2022/3/10/81b3ab9f-1f9d-4820-b072-bba4caaff25e1646890035269-Varanga-Magenta-Silk-Kurta-With-Woven-Yoke-And-Fully-Elastic-1.jpg","brand":"Varanga","name":"Women Yoke Design Kurta with Trousers With Dupatta","price":1349,"gender":"female"},{"id":49,"rating":4.5,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/22858200/2023/4/27/190af50d-4a62-42b2-93f6-aca26ae7c5961682582082917-Anaya-Womens-Cotton-Straight-Sleeveless-Suit-Set-46116825820-1.jpg","brand":"anayna","name":"Women Printed Kurta with Trousers","price":1022,"gender":"female"},{"id":50,"rating":4.2,"image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/24962866/2023/9/13/2a3a9c1c-ba11-4693-961e-58026a501d4f1694604108841KurtaSets1.jpg","brand":"FASHOR","name":"Women Kurta with Trousers","price":1709,"gender":"female"},{"id":51,"name":"Pure Cotton T-shirt","rating":4.2,"brand":"Roadster","image":"https://assets.myntassets.com/dpr_2,q_60,w_210,c_limit,fl_progressive/assets/images/2275365/2022/11/22/a3af8a2f-a385-4cb7-bf7b-e34e0925fe0d1669105782439-Roadster-Men-White--Pure-Cotton-T-shirt-7301669105781913-1.jpg","price":398,"gender":"male"}]
 const [currentIndex, setCurrentIndex] = useState(0);
 const [cardsData,setcarddata]=useState([])
@@ -93,7 +96,7 @@ useEffect(() => {
   setCurrentProductIndex2((prevIndex) =>
   prevIndex >= data.length - 1 ? 0 : prevIndex + 1
 );
-  }, 5000);
+  }, 2000);
 
   return () => {
     clearInterval(interval);
@@ -122,7 +125,7 @@ const handletab=(e)=>{
 }
 const [currentPage, setCurrentPage] = useState(0);
 const cardsPerPage = 3;
-const totalPages = Math.ceil(cardsData.length / cardsPerPage);
+const totalPages = Math.ceil(data.length / cardsPerPage);
 const handleNextPage = () => {
   if (currentPage < totalPages - 1) {
     setCurrentPage(currentPage + 1);
@@ -223,6 +226,10 @@ const [currentPage1, setCurrentPage1] = useState(0);
     </CARTICON>
       <Box position="relative" overflow="hidden" onTouchMove={handleSwipe} mt={"20px"}>
       <Carousel
+      emulateTouch={true}
+      showStatus={false}
+      showThumbs={false}
+      autoPlay={true}
        selectedItem={currentIndex}
        onChange={setCurrentIndex}>
       {images.map((image, index) => (
@@ -233,17 +240,27 @@ const [currentPage1, setCurrentPage1] = useState(0);
     </Carousel>
     </Box>
     <DIV1>
-    <Box className="section-container" backgroundColor="gray.700">
-      <Text className="section-title">
-        Elevate Your Style, <br /> Embrace the Extraordinary.
-      </Text>
-      <Text className="section-text">
-        Pioneering the fashion frontier, our platform brings together style enthusiasts, designers, and brands, igniting a revolution in unique, ownable fashion finds.
-      </Text>
-      <Button className="section-button">
-        Shop Now
-      </Button>
-    </Box>
+    <Box
+  className="section-container"
+  color="white"
+  mt={"20px"}
+  bgImage="url('https://images.pexels.com/photos/8886963/pexels-photo-8886963.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"
+  bgSize="revert"
+  bgPosition="cover"
+  maxH={'-moz-fit-content'}
+  fontFamily={"monospace"}
+>
+  <Text className="section-title">
+    Elevate Your Style, <br /> Embrace the Extraordinary.
+  </Text>
+  <Text className="section-text">
+    Pioneering the fashion frontier, our platform brings together style enthusiasts, designers, and brands, igniting a revolution in unique, ownable fashion finds.
+  </Text>
+  <Button className="section-button">
+    Shop Now
+  </Button>
+</Box>
+
     </DIV1>
     <DIV>
     <Box textAlign="center" padding="2rem">
@@ -393,8 +410,11 @@ const [currentPage1, setCurrentPage1] = useState(0);
   </Text>
   <Text
     fontSize={{ base: "md", md: "lg", lg: "xl" }}
-    color="gray.600"
+    color="green.400"
     mt="1rem"
+    fontFamily={"monospace"}
+    w={'60%'}
+    margin={'auto'}
   >
     Browse the collection of our dark best-selling and top interesting products.
     You’ll definitely find what you are looking for.
@@ -494,6 +514,20 @@ const [currentPage1, setCurrentPage1] = useState(0);
         </TabPanels>
       </Tabs>
     </div>
+    <Box position="relative" overflow="hidden" onTouchMove={handleSwipe} m={"20px"}>
+      <Carousel
+      emulateTouch={true}
+       selectedItem={currentIndex}
+       showStatus={false}
+       showThumbs={false}
+       onChange={setCurrentIndex}>
+      {images3.map((image, index) => (
+        <div key={index}>
+          <img src={image} alt={`Slide ${index}`} />
+        </div>
+      ))}
+    </Carousel>
+    </Box>
   <DIV5>
   <div className="image-container">
     <div className="image-wrapper">
@@ -530,7 +564,6 @@ const [currentPage1, setCurrentPage1] = useState(0);
   </Text>
 </Box>
     <div className='maindiv'>
-      
     <div>
       <h2>1.</h2>
       <h3>Place Order</h3>
@@ -563,8 +596,9 @@ const [currentPage1, setCurrentPage1] = useState(0);
   </Text>
   <Text
     fontSize={{ base: "md", md: "lg", lg: "xl" }}
-    color="black"
+    color="green.400"
     mt="1rem"
+    fontFamily={"monospace"}
   >
     We explore the world of fashion every month and bring the best stories from around the world for our readers.
   </Text>
@@ -755,37 +789,40 @@ h1 {
   }
 }
 `
-
 const DIV1=styled.div`
 .section-container {
-  text-align: center;
+  /* text-align: start; */
   padding: 2rem;
+  color:black
 }
 .section-title {
   font-size: 2rem;
   font-weight: bold;
-  color: white;
   margin-bottom: 2rem;
+  
 }
 .section-text {
   font-size: 1.2rem;
-  color: white;
-  margin-bottom: 2rem;
-  width: 70%;
+  font-weight: 100;
   margin: auto;
+  width: 50%;
+  text-align: center;
+  /* text-align:start; */
+  color:white
 }
 .section-button {
   border: 2px solid black;
-  color: white;
   background-color: transparent;
   padding: 0.5rem 1rem;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s;
+  color: white;
 }
 .section-button:hover {
   transform: scale(1.1);
-  color: #000000;
+  background-color: white;
+  color:black
 }
 @media screen and (max-width: 767px) {
   .section-title {
@@ -907,6 +944,7 @@ const TABDIV=styled.div`
  }
 `
 const DIV5=styled.div`
+margin: 20px;
 .image-container {
   display: flex;
   width: 100%;
