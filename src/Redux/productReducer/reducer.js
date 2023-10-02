@@ -37,6 +37,24 @@ export const reducer= (state = initialState, action) => {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
       };
+      case actionTypes.FETCH_PRODUCTS_BY_SEARCH_REQUEST:
+        return{
+          ...state,
+          loading: true,
+        error: null,
+        }
+      case actionTypes.FETCH_PRODUCTS_BY_SEARCH_SUCCESS:
+        return{
+          ...state,
+        loading: false,
+        products: action.payload,
+        }
+      case actionTypes.FETCH_PRODUCTS_BY_SEARCH_FAILURE:
+        return{
+          ...state,
+        loading: false,
+        error: action.payload,
+        }
     default:
       return state;
   }

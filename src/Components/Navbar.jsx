@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useSearchParams } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -24,13 +24,17 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import { useState,useEffect } from 'react';
-import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
 export const Navbar = () => {
+  // const [searchparams, setSearchparams] = useSearchParams();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThanTablet] = useMediaQuery('(min-width: 768px)');
   const [scrolling, setScrolling] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
-
+  // const initialSearch = searchparams.get('search');
+  const [search,setsearch]=useState("")
+  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -50,6 +54,7 @@ export const Navbar = () => {
     transition: 'transform 0.3s ease-in-out',
   };
 const Navigate=useNavigate()
+
   return (
       <Flex
   as="nav"
@@ -61,8 +66,9 @@ const Navigate=useNavigate()
   height={'auto'}
   className={`navbar`}
   style={navbarStyle}
+  zIndex={"-1"}
 >
-  <Link href="#" marginLeft={'50px'} fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" _hover={{ transform: 'scale(1.1)' }}>
+  <Link href="/" marginLeft={'50px'} fontSize={{ base: '2xl', md: '3xl' }} fontWeight="bold" _hover={{ transform: 'scale(1.1)' }}>
     clickIt
   </Link>
   
@@ -90,20 +96,28 @@ const Navigate=useNavigate()
     <InputGroup>
       <InputLeftElement
         pointerEvents="none"
-        children={<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>}
       />
-      <Input type="text" placeholder="Search" marginRight="2" />
+      <Input type="text" placeholder="Search" marginRight="2"  value={search}
+        onChange={(e)=>setsearch(e.target.value)}/>
+        <Link href={`/product/${search}`} alignSelf={"center"}><button>Search</button></Link>
     </InputGroup>
   </Box>
-  
-  <Button onClick={()=>Navigate("/login")}
+  {
+        isAuth ? <Button onClick={()=>Navigate("/login")}
+        marginRight={'50px'}
+        _hover={{ transform: 'scale(1.1)', color: 'teal.500' }}
+        display={{ base: 'none', md: 'block' }}
+      >
+        Logout
+      </Button> : <Button onClick={()=>Navigate("/login")}
     marginRight={'50px'}
     _hover={{ transform: 'scale(1.1)', color: 'teal.500' }}
     display={{ base: 'none', md: 'block' }}
-    // onClick={onClose}
   >
     Login
   </Button>
+      }
+  
   {!isLargerThanTablet && (
     <IconButton
       icon={<HamburgerIcon />}
@@ -155,9 +169,13 @@ const Navigate=useNavigate()
             </Link>
           </ListItem>
           <ListItem>
+            {isAuth?<Link href="#" _hover={{ color: 'teal.500' }}>
+              LogOut
+            </Link>:
             <Link href="#" _hover={{ color: 'teal.500' }}>
-              LogIn
-            </Link>
+            LogIn
+          </Link>}
+            
           </ListItem>
         </List>
       </DrawerBody>

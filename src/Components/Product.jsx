@@ -5,24 +5,24 @@ import { Box, Grid, GridItem } from '@chakra-ui/react';
 import ProductCard from './ProductCard';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import Pagination from './Pagination';
-
+import { useParams } from 'react-router-dom';
 export const Product = () => {
   const [currPage, setCurrPage] = useState(1);
-
   const product = useSelector((state) => state.productReducer.products);
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-
+  console.log(searchParams)
   const location = useLocation();
-
+  const {search}=useParams()
   useEffect(() => {
     const obj = {
       params: {
+        search:search,
         brand: searchParams.getAll('brand'),
         gender: searchParams.getAll('gender'),
         rate: searchParams.getAll('rate'),
-        _sort: searchParams.get('order') === 'asc' ? 'price' : 'price',
-        _order: searchParams.get('order'),
+        sortBy: searchParams.get('order') === 'asc' ? 'price' : 'price',
+        order: searchParams.get('order'),
         page: currPage,
       },
     };

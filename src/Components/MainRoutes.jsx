@@ -18,6 +18,7 @@ export const MainRoutes = () => {
       <Route path='/cart' element={<PrivateRoute><Cart/> </PrivateRoute> } />
       <Route path='/payment' element={<Payment />} />
       <Route path='/product' element={<NewArrivals />} />
+      <Route path='/product/:search' element={<NewArrivals/>} />
       <Route path='/product/:id' element={<Dashboard />} />
       <Route path='login' element={<Login />} />
       <Route path='/verifyotp' element={<VerifyEmailForm/>}/>
