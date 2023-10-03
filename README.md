@@ -84,6 +84,8 @@ Start the server
 
 - Verification Feature
 <img src="https://github.com/Sushree-01/dainty-snake-6499/blob/main/Screenshots/Account%20Verification%20System.PNG"  width="600" >
+
+
 ## Contributors
 
 - [Sushree Subhashree Sahoo](https://github.com/Sushree-01)
