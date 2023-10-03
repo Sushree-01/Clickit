@@ -33,31 +33,8 @@ User Features :
 - Add to Cart
 - Cart page
 - Checkout/Payment page 
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/Sushree-01/dainty-snake-6499
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
-```
-
-Install dependencies
-
-```bash
-  npm install
-```
-
-Start the server
-
-```bash
-  npm run start
-```
+ 
+ 
 
 ## Project Screenshots
 
