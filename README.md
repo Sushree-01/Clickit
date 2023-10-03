@@ -19,7 +19,7 @@ Clickit is a Ecommerce website for Shopping Clothes. This website contains detai
 ![](https://miro.medium.com/v2/resize:fit:792/1*lJ32Bl-lHWmNMUSiSq17gQ.png)
 ![](https://repository-images.githubusercontent.com/37153337/9d0a6780-394a-11eb-9fd1-6296a684b124)
  ![](https://redux.js.org/img/redux-logo-landscape.png)
-![](https://repository-images.githubusercontent.com/37153337/9d0a6780-394a-11eb-9fd1-6296a684b124)
+ 
 **Server:** mockAPI
 
 
@@ -73,16 +73,8 @@ Start the server
 - Pagination
 <img src="https://github.com/Sushree-01/dainty-snake-6499/blob/main/Screenshots/Pagination%20Feature.PNG"  width="600" >
 
-
-- Pagination
-<img src="https://github.com/Sushree-01/dainty-snake-6499/blob/main/Screenshots/Pagination%20Feature.PNG"  width="600" >
-
 - Signup Page
 <img src="https://github.com/Sushree-01/dainty-snake-6499/blob/main/Screenshots/Signup%20page.PNG"  width="600" >
-
-- Signup Page
-<img src="https://github.com/Sushree-01/dainty-snake-6499/blob/main/Screenshots/Signup%20page.PNG"  width="600" >
-
 
 - Login Page
 <img src="https://github.com/Sushree-01/dainty-snake-6499/blob/main/Screenshots/Login%20page.PNG"  width="600" >
