@@ -16,9 +16,7 @@ Clickit is a Ecommerce website for Shopping Clothes. This website contains detai
 
 **Client:**
 
-![](https://miro.medium.com/v2/resize:fit:792/1*lJ32Bl-lHWmNMUSiSq17gQ.png)
-![](https://repository-images.githubusercontent.com/37153337/9d0a6780-394a-11eb-9fd1-6296a684b124)
- ![](https://redux.js.org/img/redux-logo-landscape.png)
+
  
 **Server:** mockAPI
 
